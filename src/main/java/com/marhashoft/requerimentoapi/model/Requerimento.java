@@ -32,6 +32,9 @@ public class Requerimento {
     @Size(min = 5, message = "Justificativa precisa ter no mínimo 5 caracteres")
     private String justificativa;
 
+    @NotEmpty
+    private String numero;
+
     private LocalDateTime dataRequerimento = LocalDateTime.now();
 
     @OneToOne(cascade = CascadeType.ALL)
