@@ -2,21 +2,21 @@
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.12.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c14896b-0208-47b4-a7b1-336d79a69d68">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="motivo" class="java.lang.String">
+		<parameterDescription><![CDATA[motivo]]></parameterDescription>
+	</parameter>
+	<parameter name="justificativa" class="java.lang.String">
+		<parameterDescription><![CDATA[justificativa]]></parameterDescription>
+	</parameter>
+	<parameter name="numero" class="java.lang.String">
+		<parameterDescription><![CDATA[numero]]></parameterDescription>
+	</parameter>
+	<parameter name="pessoa" class="java.lang.String">
+		<parameterDescription><![CDATA[pessoa]]></parameterDescription>
+	</parameter>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="motivo" class="java.lang.String">
-		<fieldDescription><![CDATA[motivo]]></fieldDescription>
-	</field>
-	<field name="justificativa" class="java.lang.String">
-		<fieldDescription><![CDATA[justificativa]]></fieldDescription>
-	</field>
-	<field name="pessoa" class="java.lang.String">
-		<fieldDescription><![CDATA[pessoa]]></fieldDescription>
-	</field>
-	<field name="numero" class="java.lang.String">
-		<fieldDescription><![CDATA[numero]]></fieldDescription>
-	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -54,16 +54,16 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 		</band>
 	</title>
 	<pageHeader>
-		<band height="92" splitType="Stretch">
-			<textField>
-				<reportElement x="132" y="63" width="100" height="20" uuid="d26f93cc-9783-4fc5-9e46-77dbb9667c03"/>
-				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
-			</textField>
+		<band height="109" splitType="Stretch">
 			<staticText>
 				<reportElement x="132" y="24" width="348" height="30" uuid="19064803-a9f1-4b4d-b626-55fec91cd034"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Exmo. Sr. Presidente da Câmara Municipal de Mamanguape:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="134" y="81" width="100" height="22" uuid="31ac56e9-f179-4d85-b974-040c5e505c9a"/>
+				<textFieldExpression><![CDATA[$P{numero}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>
@@ -83,7 +83,7 @@ Que seja feito o asfaltamento da Rua Francisco Cleto, centro, nesta Cidade.
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="226" y="92" width="134" height="21" uuid="a9c9510d-e380-4f2a-95b3-ac613addffb4"/>
+				<reportElement x="226" y="98" width="134" height="21" uuid="a9c9510d-e380-4f2a-95b3-ac613addffb4"/>
 				<textElement>
 					<font fontName="Courier New" size="14" isBold="true"/>
 				</textElement>
@@ -100,17 +100,13 @@ Sala das Sessões da Câmara Municipal de Mamanguape, em 10 de Março de 2.022.
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="80" y="123" width="429" height="30" uuid="f095b6b5-152c-4b61-ad34-03b7062da203"/>
-				<textFieldExpression><![CDATA[$F{justificativa}]]></textFieldExpression>
+				<reportElement x="80" y="62" width="420" height="30" uuid="22e9094d-9e06-4a6a-83e0-0e751b1aa680"/>
+				<textFieldExpression><![CDATA[$P{motivo}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="159" y="139" width="100" height="30" uuid="163eaeca-3813-4fdd-82f5-f7339e3f9992"/>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="183" y="57" width="100" height="30" uuid="927cdb3d-b02c-4889-8bb3-beaec51ea1fb"/>
-				<text><![CDATA[]]></text>
-			</staticText>
+			<textField>
+				<reportElement x="80" y="130" width="420" height="30" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df"/>
+				<textFieldExpression><![CDATA[$P{justificativa}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
@@ -120,9 +116,8 @@ Sala das Sessões da Câmara Municipal de Mamanguape, em 10 de Março de 2.022.
 				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="170" y="18" width="200" height="22" uuid="1de81ede-33c3-4c6b-8407-dbb51b1aa02a"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{pessoa}]]></textFieldExpression>
+				<reportElement x="276" y="28" width="100" height="30" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
+				<textFieldExpression><![CDATA[$P{pessoa}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

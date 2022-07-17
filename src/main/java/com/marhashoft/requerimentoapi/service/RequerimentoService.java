@@ -50,35 +50,30 @@ public class RequerimentoService {
 //        try {
 //            JasperReport pdfRequerimentoCompilado = JasperCompileManager.compileReport("src/main/resources/jasper/requerimento.jrxml");
 
-        Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + "jasper/requerimento.jasper");
-        System.out.println("Resource "+resource);
+        Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + "/jasper/requerimento.jasper");
+//        System.out.println("Resource "+resource);
         JasperReport report = (JasperReport) JRLoader.loadObject(resource.getInputStream());
 
         JRBeanCollectionDataSource dataSource =
                     new JRBeanCollectionDataSource(Collections.singletonList(""));
 
-        System.out.println("PARAMS "+preencherParametros(requerimento));
-            JasperPrint pdfRequerimentoPreenchido = JasperFillManager
-                    .fillReport(report, preencherParametros(requerimento), dataSource);
+        JasperPrint pdfRequerimentoPreenchido = JasperFillManager
+                .fillReport(report, preencherParametros(requerimento), dataSource);
 
-            byte[] pdfByteArray =  JasperExportManager.exportReportToPdf(pdfRequerimentoPreenchido);
+        byte[] pdfByteArray =  JasperExportManager.exportReportToPdf(pdfRequerimentoPreenchido);
 
-            File file = transformeByteParaFile(pdfByteArray, requerimento);
-            downloadArquivo(file, response);
-
-//        } catch (JRException e) {
-//            Logger.getLogger(e.getMessage());
-//        }
-//        return new byte[0];
+        File file = transformeByteParaFile(pdfByteArray, requerimento);
+        downloadArquivo(file, response);
     }
 
     private Map<String, Object> preencherParametros(Requerimento requerimento) {
         Map<String, Object> parametros = new HashMap<>();
-//        parametros.put("motivo", requerimento.getMotivo());
+
+        parametros.put("motivo", requerimento.getMotivo());
         parametros.put("justificativa", requerimento.getJustificativa());
         parametros.put("numero", requerimento.getNumero());
-//
-//        return parametros;
+        parametros.put("pessoa", requerimento.getPessoa());
+
         return parametros;
     }
 
