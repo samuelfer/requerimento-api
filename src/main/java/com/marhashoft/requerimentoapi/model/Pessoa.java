@@ -22,4 +22,5 @@ public class Pessoa {
     @Column(nullable = false)
     private String nome;
     private String cargo;
+    private boolean ativo;
 }
