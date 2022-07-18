@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,8 +29,19 @@ public class RequerimentoController {
     private RequerimentoService requerimentoService;
 
     @GetMapping
-    public List<Requerimento> getAll() {
+    public List<Requerimento> listarTodos() {
         return requerimentoService.listarTodos();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listarPorId(@PathVariable("id") Long id) {
+        try {
+            Requerimento requerimento = requerimentoService.findByIdOuErro(id);
+            return new ResponseEntity<>(requerimento, HttpStatus.OK);
+        } catch (Exception e) {
+            Logger.getLogger(e.getMessage());
+            return new ResponseEntity<>(Arrays.asList(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping

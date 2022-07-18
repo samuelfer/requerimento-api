@@ -46,12 +46,8 @@ public class RequerimentoService {
     }
 
     public void gerarPdf(Requerimento requerimento, HttpServletResponse response)  throws Exception {
-
-//        try {
-//            JasperReport pdfRequerimentoCompilado = JasperCompileManager.compileReport("src/main/resources/jasper/requerimento.jrxml");
-
         Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + "/jasper/requerimento.jasper");
-//        System.out.println("Resource "+resource);
+
         JasperReport report = (JasperReport) JRLoader.loadObject(resource.getInputStream());
 
         JRBeanCollectionDataSource dataSource =
