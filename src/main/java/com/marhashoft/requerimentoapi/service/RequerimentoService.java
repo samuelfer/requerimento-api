@@ -65,10 +65,9 @@ public class RequerimentoService {
     private Map<String, Object> preencherParametros(Requerimento requerimento) {
         Map<String, Object> parametros = new HashMap<>();
 
-        parametros.put("motivo", requerimento.getMotivo());
-        parametros.put("justificativa", requerimento.getJustificativa());
+        parametros.put("assunto", requerimento.getAssunto());
         parametros.put("numero", requerimento.getNumero());
-        parametros.put("pessoa", requerimento.getPessoa());
+        parametros.put("pessoa", requerimento.getPessoa().getNome());
 
         return parametros;
     }

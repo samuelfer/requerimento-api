@@ -22,15 +22,10 @@ public class Requerimento {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "requerimento_seq")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "text")
     @NotEmpty
-    @Size(min = 5, message = "Motivo precisa ter no mínimo 5 caracteres")
-    private String motivo;
-
-    @Column(nullable = false)
-    @NotEmpty
-    @Size(min = 5, message = "Justificativa precisa ter no mínimo 5 caracteres")
-    private String justificativa;
+    @Size(min = 5, message = "Assunto precisa ter no mínimo 5 caracteres")
+    private String assunto;
 
     @NotEmpty
     private String numero;
