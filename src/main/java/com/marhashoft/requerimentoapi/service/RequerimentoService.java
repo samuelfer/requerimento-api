@@ -17,10 +17,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 
 import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
@@ -68,7 +65,10 @@ public class RequerimentoService {
         parametros.put("assunto", requerimento.getAssunto());
         parametros.put("numero", requerimento.getNumero());
         parametros.put("pessoa", requerimento.getPessoa().getNome());
-
+        parametros.put("textoPadraoPessoa", requerimento.getPessoa().getNome()
+                +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
+        parametros.put("textoPadrao", "O requerente pede o apoio unânime de seus pares na aprovação do presente pedido bem como por parte do Poder Executivo Municipal" +
+                "Sala das Sessões da Câmara Municipal de Mamanguape, em "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date()));
         return parametros;
     }
 

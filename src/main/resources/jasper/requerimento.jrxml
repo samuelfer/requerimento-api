@@ -2,17 +2,20 @@
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.12.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c14896b-0208-47b4-a7b1-336d79a69d68">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<parameter name="motivo" class="java.lang.String">
-		<parameterDescription><![CDATA[motivo]]></parameterDescription>
-	</parameter>
-	<parameter name="justificativa" class="java.lang.String">
-		<parameterDescription><![CDATA[justificativa]]></parameterDescription>
+	<parameter name="assunto" class="java.lang.String">
+		<parameterDescription><![CDATA[assunto]]></parameterDescription>
 	</parameter>
 	<parameter name="numero" class="java.lang.String">
 		<parameterDescription><![CDATA[numero]]></parameterDescription>
 	</parameter>
 	<parameter name="pessoa" class="java.lang.String">
 		<parameterDescription><![CDATA[pessoa]]></parameterDescription>
+	</parameter>
+	<parameter name="textoPadrao" class="java.lang.String">
+		<parameterDescription><![CDATA[textoPadrao]]></parameterDescription>
+	</parameter>
+	<parameter name="textoPadraoPessoa" class="java.lang.String">
+		<parameterDescription><![CDATA[textoPadraoPessoa]]></parameterDescription>
 	</parameter>
 	<queryString>
 		<![CDATA[]]>
@@ -39,86 +42,71 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 “CASA SENADOR RUI CARNEIRO”
 ]]></text>
 			</staticText>
-			<line>
-				<reportElement x="59" y="222" width="450" height="1" uuid="a355f1ce-e693-4ab8-a2aa-a40fb9f5994d">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="59" y="218" width="450" height="1" uuid="fb92d77d-b43c-489b-a20d-46171ee45168">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-			</line>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="109" splitType="Stretch">
 			<staticText>
-				<reportElement x="132" y="24" width="348" height="30" uuid="19064803-a9f1-4b4d-b626-55fec91cd034"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="132" y="24" width="348" height="16" uuid="19064803-a9f1-4b4d-b626-55fec91cd034"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
 				<text><![CDATA[Exmo. Sr. Presidente da Câmara Municipal de Mamanguape:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="134" y="81" width="100" height="22" uuid="31ac56e9-f179-4d85-b974-040c5e505c9a"/>
+				<reportElement x="125" y="80" width="100" height="22" uuid="31ac56e9-f179-4d85-b974-040c5e505c9a"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{numero}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="251" splitType="Stretch">
+		<band height="290" splitType="Stretch">
 			<staticText>
 				<reportElement x="74" y="-29" width="66" height="23" uuid="99cec89f-22f0-4e54-bb3d-1d17878e3478"/>
 				<textElement>
-					<font fontName="Courier New" size="12" isBold="true"/>
+					<font fontName="Calibri" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Req. Nº.]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="80" y="11" width="430" height="30" uuid="b3e6e612-a512-4931-89d5-73594772b11d"/>
-				<text><![CDATA[Guilherme Antônio de Andrade Fernandes, Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:
- 
-Que seja feito o asfaltamento da Rua Francisco Cleto, centro, nesta Cidade.
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="226" y="98" width="134" height="21" uuid="a9c9510d-e380-4f2a-95b3-ac613addffb4"/>
-				<textElement>
-					<font fontName="Courier New" size="14" isBold="true"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="80" y="50" width="460" height="70" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12"/>
 				</textElement>
-				<text><![CDATA[Justificativa]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="80" y="183" width="420" height="51" uuid="ae48de87-c11c-4b93-b2b8-8177a40ad771"/>
-				<textElement>
-					<font fontName="Courier New" size="12"/>
-				</textElement>
-				<text><![CDATA[O requerente pede o apoio unânime de seus pares na aprovação do presente pedido bem como por parte do Poder Executivo Municipal
-
-Sala das Sessões da Câmara Municipal de Mamanguape, em 10 de Março de 2.022.
-]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="80" y="62" width="420" height="30" uuid="22e9094d-9e06-4a6a-83e0-0e751b1aa680"/>
-				<textFieldExpression><![CDATA[$P{motivo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{assunto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="80" y="130" width="420" height="30" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df"/>
-				<textFieldExpression><![CDATA[$P{justificativa}]]></textFieldExpression>
+				<reportElement x="80" y="230" width="430" height="60" uuid="af228808-1b2b-4823-8d7a-cc551294b985"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{textoPadrao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="10" width="460" height="30" uuid="dff88445-e2a2-45e5-993c-31b8ba1410c0"/>
+				<textFieldExpression><![CDATA[$P{textoPadraoPessoa}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="58" splitType="Stretch">
+		<band height="78" splitType="Stretch">
 			<textField>
-				<reportElement x="226" y="18" width="100" height="12" uuid="8c142092-2287-4185-8db0-d153b03a1220"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="276" y="28" width="100" height="30" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
+				<reportElement x="220" y="28" width="100" height="22" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{pessoa}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="220" y="48" width="100" height="22" uuid="02283a7f-acfd-43d4-9e96-1fd1aa84d1c7"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Vereador(a)]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
