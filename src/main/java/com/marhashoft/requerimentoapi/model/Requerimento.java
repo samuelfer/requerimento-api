@@ -27,12 +27,11 @@ public class Requerimento {
     @Size(min = 5, message = "Assunto precisa ter no mínimo 5 caracteres")
     private String assunto;
 
-    @NotEmpty
     private String numero;
 
     private LocalDateTime dataRequerimento = LocalDateTime.now();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "pessoa_id", foreignKey = @ForeignKey(name = "pessoa_id_fk"), nullable=false)
     private Pessoa pessoa;
 }
