@@ -20,7 +20,7 @@ import java.util.Set;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
     private Long id;
 
     @Column(nullable = false)
@@ -29,7 +29,7 @@ public class Usuario {
     @Column(unique = true)
     private String email;
 
-    private boolean senha;
+    private String senha;
 
     //HashSet nao vai permitir valores repetidos na lista
     @ElementCollection(fetch = FetchType.EAGER)
@@ -38,5 +38,7 @@ public class Usuario {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
+
+    private boolean ativo;
 
 }
