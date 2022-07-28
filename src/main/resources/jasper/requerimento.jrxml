@@ -87,6 +87,9 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 			</textField>
 			<textField>
 				<reportElement x="80" y="10" width="460" height="30" uuid="dff88445-e2a2-45e5-993c-31b8ba1410c0"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{textoPadraoPessoa}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -94,7 +97,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 	<columnFooter>
 		<band height="78" splitType="Stretch">
 			<textField>
-				<reportElement x="220" y="28" width="100" height="22" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
+				<reportElement x="150" y="28" width="310" height="22" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
 				<textElement>
 					<font fontName="Calibri" size="12"/>
 				</textElement>

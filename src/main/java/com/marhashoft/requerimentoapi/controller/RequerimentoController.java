@@ -53,7 +53,7 @@ public class RequerimentoController {
     public void gerarPdf(@PathVariable("id") Long id, HttpServletResponse response) {
         try {
             Requerimento requerimento = requerimentoService.findByIdOuErro(id);
-            requerimentoService.gerarPdf(requerimento, response);
+            requerimentoService.gerarPdfRequerimento(requerimento, response);
         } catch (Exception e) {
             System.out.println("Erro ao tentar gerar o pdf "+e.getMessage());
             Logger.getLogger(e.getMessage());
