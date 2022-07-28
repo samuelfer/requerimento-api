@@ -1,8 +1,8 @@
 package com.marhashoft.requerimentoapi.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.cors.CorsConfiguration;
@@ -11,14 +11,19 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-@EnableAsync
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String[] PUBLIC_MATCHERS = {""};//Rotas que serao publicas
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
+        http.cors().and().csrf().disable();//Informando que temos uma configuracao de cors
 
-        //Garante que nao sera criada sessao de usuario
+        http.authorizeRequests()
+                .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .anyRequest().authenticated();
+
+        //Garante que nao serah criada sessao de usuario
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
