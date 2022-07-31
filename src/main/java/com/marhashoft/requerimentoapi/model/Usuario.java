@@ -34,7 +34,7 @@ public class Usuario {
     //HashSet nao vai permitir valores repetidos na lista
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "perfis")
-    protected Set<Integer> perfis = new HashSet<>();
+    protected Set<Perfil> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
