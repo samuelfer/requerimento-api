@@ -1,10 +1,15 @@
 package com.marhashoft.requerimentoapi.config;
 
+import com.marhashoft.requerimentoapi.security.JWTUtil;
+import com.marhashoft.requerimentoapi.security.JWTUtilAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -15,10 +20,16 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] PUBLIC_MATCHERS = {"/login", "/usuarios"};//Rotas que serao publicas
+    @Autowired
+    private JWTUtil jwtUtil;
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    private static final String[] PUBLIC_MATCHERS = {"/usuarios"};//Rotas que serao publicas
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();//Informando que temos uma configuracao de cors
+        http.addFilter(new JWTUtilAuthenticationFilter(authenticationManager(), jwtUtil));
 
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
@@ -26,6 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //Garante que nao serah criada sessao de usuario
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean
