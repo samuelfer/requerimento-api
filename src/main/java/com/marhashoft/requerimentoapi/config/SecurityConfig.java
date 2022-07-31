@@ -15,7 +15,7 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] PUBLIC_MATCHERS = {""};//Rotas que serao publicas
+    private static final String[] PUBLIC_MATCHERS = {"/login", "/usuarios"};//Rotas que serao publicas
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();//Informando que temos uma configuracao de cors
