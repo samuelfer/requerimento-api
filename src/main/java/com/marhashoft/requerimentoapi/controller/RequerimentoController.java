@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -44,11 +45,13 @@ public class RequerimentoController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Requerimento> cadastrar(@Valid @RequestBody Requerimento requerimento) {
         return new ResponseEntity(requerimentoService.salvar(requerimento), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/{id}/gerarpdf")
     public void gerarPdf(@PathVariable("id") Long id, HttpServletResponse response) {
         try {

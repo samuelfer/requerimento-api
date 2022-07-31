@@ -2,8 +2,8 @@ package com.marhashoft.requerimentoapi.model;
 
 public enum Perfil {
 
-    ADMIN(0, "ROLE_ADMIN"),
-    USUARIO(1, "ROLE_USUARIO");
+    ADMIN(1, "ROLE_ADMIN"),
+    USUARIO(2, "ROLE_USUARIO");
 
     private Integer codigo;
     private String descricao;
