@@ -28,24 +28,23 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario create(UsuarioDTO usuarioDTO) {
-        usuarioDTO.setId(null);
-        usuarioDTO.setSenha(bCryptPasswordEncoder.encode(usuarioDTO.getSenha()));
-        validaPorEmail(usuarioDTO);
-        ModelMapper modelMapper = new ModelMapper();
-        Usuario usuario = modelMapper.map(usuarioDTO, Usuario.class);
+    public Usuario create(Usuario usuario) {
+        usuario.setId(null);
+        usuario.setAtivo(true);
+        usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
+        validaPorEmail(usuario);
         return usuarioRepository.save(usuario);
     }
 
-    public UsuarioDTO update(Long id, UsuarioDTO usuarioDTO) {
-        usuarioDTO.setId(id);
+    public Usuario update(Long id, Usuario usuario) {
+        usuario.setId(id);
         Usuario oldUsuario = findByIdOuErro(id);
 
-        if(!usuarioDTO.getSenha().equals(oldUsuario.getSenha())) {
-            oldUsuario.setSenha(bCryptPasswordEncoder.encode(usuarioDTO.getSenha()));
+        if(!usuario.getSenha().equals(oldUsuario.getSenha())) {
+            oldUsuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
         }
 
-        validaPorEmail(usuarioDTO);
+        validaPorEmail(usuario);
 
         Usuario usuarioSalvo = usuarioRepository.save(oldUsuario);
 
@@ -54,10 +53,10 @@ public class UsuarioService {
         return usuarioDTOResponse;
     }
 
-    private void validaPorEmail(UsuarioDTO usuarioDTO) {
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(usuarioDTO.getEmail());
+    private void validaPorEmail(Usuario usuarioParam) {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(usuarioParam.getEmail());
 
-        if (usuario.isPresent() && usuario.get().getId() != usuarioDTO.getId()) {
+        if (usuario.isPresent() && usuario.get().getId() != usuarioParam.getId()) {
             throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
         }
     }

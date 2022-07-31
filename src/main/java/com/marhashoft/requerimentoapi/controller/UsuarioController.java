@@ -39,16 +39,15 @@ public class UsuarioController {
 
     @ApiOperation(value = "Cadastra usuario")
     @PostMapping
-    public ResponseEntity<Usuario> create(@Valid @RequestBody UsuarioDTO usuarioDTO) {
-        Usuario newUsuario = usuarioService.create(usuarioDTO);
+    public ResponseEntity<Usuario> create(@Valid @RequestBody Usuario usuario) {
+        Usuario newUsuario = usuarioService.create(usuario);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUsuario.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @ApiOperation(value = "Atualiza usuario")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UsuarioDTO> update(@PathVariable Long id, @Valid @RequestBody UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuarioResponse = usuarioService.update(id, usuarioDTO);
-        return ResponseEntity.ok().body(usuarioResponse);
+    public ResponseEntity<Usuario> update(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
+        return ResponseEntity.ok().body(usuarioService.update(id, usuario));
     }
 }
