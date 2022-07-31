@@ -46,11 +46,7 @@ public class UsuarioService {
 
         validaPorEmail(usuario);
 
-        Usuario usuarioSalvo = usuarioRepository.save(oldUsuario);
-
-        ModelMapper modelMapper = new ModelMapper();
-        UsuarioDTO usuarioDTOResponse = modelMapper.map(usuarioSalvo, UsuarioDTO.class);
-        return usuarioDTOResponse;
+        return usuarioRepository.save(oldUsuario);
     }
 
     private void validaPorEmail(Usuario usuarioParam) {
