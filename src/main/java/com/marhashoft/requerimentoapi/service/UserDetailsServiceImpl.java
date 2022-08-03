@@ -19,7 +19,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+
         if (usuario.isPresent()) {
             return new UsuarioSpringSecurity(usuario.get().getId(), usuario.get().getEmail(),
                     usuario.get().getSenha(), usuario.get().getPerfis());

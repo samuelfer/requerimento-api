@@ -17,6 +17,7 @@
 	<parameter name="textoPadraoPessoa" class="java.lang.String">
 		<parameterDescription><![CDATA[textoPadraoPessoa]]></parameterDescription>
 	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -30,7 +31,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<imageExpression><![CDATA["C:/Users/samue/Desktop/logo-requerimento.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="130" y="170" width="300" height="50" uuid="d6f6c6c8-90c3-442f-a551-48b8bb62f785"/>

@@ -45,13 +45,13 @@ public class RequerimentoController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('USUARIO')")
     @PostMapping
     public ResponseEntity<Requerimento> cadastrar(@Valid @RequestBody Requerimento requerimento) {
         return new ResponseEntity(requerimentoService.salvar(requerimento), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('USUARIO')")
     @GetMapping("/{id}/gerarpdf")
     public void gerarPdf(@PathVariable("id") Long id, HttpServletResponse response) {
         try {
