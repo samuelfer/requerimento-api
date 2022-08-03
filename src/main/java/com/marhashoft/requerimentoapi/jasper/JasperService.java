@@ -9,6 +9,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +32,8 @@ public class JasperService {
 
     @Autowired
     private ResourceLoader resourceLoader;
+    @Autowired
+    private JasperPropriedades jasperPropriedades;
 
 
     public void gerarPdf(Requerimento requerimento, HttpServletResponse response,
@@ -74,7 +77,7 @@ public class JasperService {
 
     private Map<String, Object> preencherParametros(Requerimento requerimento) {
         Map<String, Object> parametros = new HashMap<>();
-
+        parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
         parametros.put("assunto", requerimento.getAssunto());
         parametros.put("numero", requerimento.getNumero());
         parametros.put("pessoa", requerimento.getPessoa().getNome());
@@ -90,5 +93,13 @@ public class JasperService {
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + arquivo.getName() + "\"");
         IOUtils.copy(new FileInputStream(arquivo), response.getOutputStream());
         response.flushBuffer();
+    }
+
+    private String getResourcePath(String property) {
+        try {
+            return new ClassPathResource(property).getURL().toString();
+        } catch (IOException e) {
+            return null;
+        }
     }
 }

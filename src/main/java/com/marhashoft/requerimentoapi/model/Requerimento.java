@@ -1,5 +1,6 @@
 package com.marhashoft.requerimentoapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,6 @@ public class Requerimento {
     private LocalDateTime dataRequerimento = LocalDateTime.now();
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "pessoa_id", foreignKey = @ForeignKey(name = "pessoa_id_fk"), nullable=false)
+    @JoinColumn(name = "pessoa_id", nullable=false)
     private Pessoa pessoa;
 }
