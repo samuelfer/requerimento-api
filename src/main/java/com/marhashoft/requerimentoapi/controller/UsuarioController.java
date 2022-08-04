@@ -1,11 +1,9 @@
 package com.marhashoft.requerimentoapi.controller;
 
 import com.marhashoft.requerimentoapi.model.Usuario;
-import com.marhashoft.requerimentoapi.model.dto.UsuarioDTO;
 import com.marhashoft.requerimentoapi.service.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

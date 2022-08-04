@@ -1,9 +1,7 @@
 package com.marhashoft.requerimentoapi.service;
 
 import com.marhashoft.requerimentoapi.model.Usuario;
-import com.marhashoft.requerimentoapi.model.dto.UsuarioDTO;
 import com.marhashoft.requerimentoapi.repository.UsuarioRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
