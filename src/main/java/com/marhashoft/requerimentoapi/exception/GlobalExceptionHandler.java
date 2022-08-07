@@ -21,6 +21,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorDetalhe> managementResourceNotFoundException(ResourceNotFoundException exception,
                                                                             WebRequest webRequest) {
+
         ErrorDetalhe errorDetalhe = new ErrorDetalhe(LocalDateTime.now(), exception.getMessage(),
                 webRequest.getDescription(false));
         return new ResponseEntity<>(errorDetalhe, HttpStatus.NOT_FOUND);
@@ -29,6 +30,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RequerimentoApiException.class)
     public ResponseEntity<ErrorDetalhe> managementRequerimentoException(ResourceNotFoundException exception,
                                                                    WebRequest webRequest) {
+
         ErrorDetalhe errorDetalhe = new ErrorDetalhe(LocalDateTime.now(), exception.getMessage(),
                 webRequest.getDescription(false));
         return new ResponseEntity<>(errorDetalhe, HttpStatus.BAD_REQUEST);
@@ -39,6 +41,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   WebRequest webRequest) {
         ErrorDetalhe errorDetails = new ErrorDetalhe(LocalDateTime.now(), exception.getMessage(),
                 webRequest.getDescription(false));
+
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -54,5 +57,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         });
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrationViolationApiException.class)
+    public ResponseEntity<ErrorDetalhe> managementDataInTegrationViolateException(DataIntegrationViolationApiException exception,
+                                                                            WebRequest webRequest) {
+        ErrorDetalhe errorDetalhe = new ErrorDetalhe(LocalDateTime.now(), exception.getMessage(),
+                webRequest.getDescription(false));
+
+        return new ResponseEntity(errorDetalhe.getMensagem(), HttpStatus.BAD_REQUEST);
     }
 }
