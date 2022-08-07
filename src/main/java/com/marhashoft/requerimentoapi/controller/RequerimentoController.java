@@ -47,8 +47,8 @@ public class RequerimentoController {
 
     @PreAuthorize("hasAnyRole('USUARIO')")
     @PostMapping
-    public ResponseEntity<Requerimento> cadastrar(@Valid @RequestBody Requerimento requerimento) {
-        return new ResponseEntity(requerimentoService.salvar(requerimento), HttpStatus.CREATED);
+    public ResponseEntity<?> cadastrar(@Valid @RequestBody Requerimento requerimento) {
+            return new ResponseEntity<>(requerimentoService.salvar(requerimento), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasAnyRole('USUARIO')")
@@ -58,35 +58,7 @@ public class RequerimentoController {
             Requerimento requerimento = requerimentoService.findByIdOuErro(id);
             requerimentoService.gerarPdfRequerimento(requerimento, response);
         } catch (Exception e) {
-            System.out.println("Erro ao tentar gerar o pdf "+e.getMessage());
             Logger.getLogger(e.getMessage());
         }
-    }
-
-    public void downloadArquivo(File arquivo, HttpServletResponse response) throws Exception {
-        response.setContentType(APPLICATION_PDF_VALUE);
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + arquivo.getName() + "\"");
-        IOUtils.copy(new FileInputStream(arquivo), response.getOutputStream());
-        response.flushBuffer();
-    }
-
-    public File transformeByteParaFile(byte[] pdfByteArray, Requerimento requerimento) {
-        File file = new File ("requerimento"+requerimento.getId()+".pdf");
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream (file);
-            fileOutputStream.write (pdfByteArray);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fileOutputStream != null) {
-                try {
-                    fileOutputStream.close();
-                } catch (IOException ex) {
-
-                }
-            }
-        }
-        return file;
     }
 }
