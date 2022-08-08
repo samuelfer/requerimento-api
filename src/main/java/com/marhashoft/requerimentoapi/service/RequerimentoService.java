@@ -57,4 +57,8 @@ public class RequerimentoService {
             }
         }
     }
+
+    public Long countRequerimento() {
+        return repository.count();
+    }
 }

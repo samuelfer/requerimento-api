@@ -54,4 +54,8 @@ public class UsuarioService {
             throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
         }
     }
+
+    public Long countUsuario() {
+        return usuarioRepository.count();
+    }
 }

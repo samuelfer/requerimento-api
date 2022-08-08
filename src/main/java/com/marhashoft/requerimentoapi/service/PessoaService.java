@@ -25,4 +25,8 @@ public class PessoaService {
         pessoa.setAtivo(true);
         return pessoaRepository.save(pessoa);
     }
+
+    public Long countVereador() {
+        return pessoaRepository.count();
+    }
 }
