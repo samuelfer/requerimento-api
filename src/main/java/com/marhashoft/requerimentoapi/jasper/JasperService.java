@@ -79,11 +79,11 @@ public class JasperService {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
         parametros.put("assunto", requerimento.getAssunto());
-        parametros.put("numero", requerimento.getNumero());
+        parametros.put("numero", "Req. Nº. "+requerimento.getNumero());
         parametros.put("pessoa", requerimento.getPessoa().getNome());
-        parametros.put("textoPadraoPessoa", requerimento.getPessoa().getNome()
+        parametros.put("textoPadraoPessoa", "\t"+requerimento.getPessoa().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
-        parametros.put("textoPadrao", "O requerente pede o apoio unânime de seus pares na aprovação do presente pedido bem como por parte do Poder Executivo Municipal" +
+        parametros.put("textoPadrao", "\t"+"O requerente pede o apoio unânime de seus pares na aprovação do presente pedido bem como por parte do Poder Executivo Municipal" +
                 "\n\nSala das Sessões da Câmara Municipal de Mamanguape, em "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
         return parametros;
     }
