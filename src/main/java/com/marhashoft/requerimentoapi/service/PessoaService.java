@@ -1,6 +1,8 @@
 package com.marhashoft.requerimentoapi.service;
 
+import com.marhashoft.requerimentoapi.TipoPessoaEnum;
 import com.marhashoft.requerimentoapi.model.Pessoa;
+import com.marhashoft.requerimentoapi.model.TipoPessoa;
 import com.marhashoft.requerimentoapi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +19,8 @@ public class PessoaService {
         return pessoaRepository.findById(id).orElseThrow(() -> new RuntimeException("Vereador não encontrada com id " + id));
     }
 
-    public List<Pessoa> listarTodos() {
-        return pessoaRepository.findAll();
+    public List<Pessoa> listarTodos(Long tipoPessoaId) {
+        return pessoaRepository.findByAtivoTrueAndTipoPessoaOrderByNome(tipoPessoaId);
     }
 
     public Pessoa salvar(Pessoa pessoa) {

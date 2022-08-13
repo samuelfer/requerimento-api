@@ -20,7 +20,7 @@ public class TipoPessoaController {
 
     @GetMapping
     public List<TipoPessoa> listarTodos() {
-        System.out.println("Entrei no tipo pessoa");return tipoPessoaService.listarTodos();
+      return tipoPessoaService.listarTodos();
     }
 
     @PreAuthorize("hasAnyRole('USUARIO')")

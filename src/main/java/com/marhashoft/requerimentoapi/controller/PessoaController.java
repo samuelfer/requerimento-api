@@ -1,5 +1,6 @@
 package com.marhashoft.requerimentoapi.controller;
 
+import com.marhashoft.requerimentoapi.TipoPessoaEnum;
 import com.marhashoft.requerimentoapi.model.Pessoa;
 import com.marhashoft.requerimentoapi.model.Requerimento;
 import com.marhashoft.requerimentoapi.service.PessoaService;
@@ -15,15 +16,15 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/pessoas")
+@RequestMapping()
 public class PessoaController {
 
     @Autowired
     PessoaService pessoaService;
 
-    @GetMapping
-    public List<Pessoa> listarTodos() {
-        return pessoaService.listarTodos();
+    @GetMapping("/vereadores")
+    public List<Pessoa> listarVereadores() {
+        return pessoaService.listarTodos(TipoPessoaEnum.TIPO_VEREADOR.getId());
     }
 
     @GetMapping("/{id}")
