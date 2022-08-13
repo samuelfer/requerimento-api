@@ -29,4 +29,8 @@ public class Pessoa {
     @JsonIgnore
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
     private List<Requerimento> requerimentos;
+
+    @ManyToOne
+    @JoinColumn(name = "tipo_pessoa_id", foreignKey = @ForeignKey(name = "pessoa_tipo_pessoa"))
+    private TipoPessoa tipoPessoa;
 }
