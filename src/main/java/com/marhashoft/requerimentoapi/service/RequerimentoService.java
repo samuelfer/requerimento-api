@@ -31,7 +31,16 @@ public class RequerimentoService {
         return repository.findAll();
     }
 
-    public Requerimento salvar(Requerimento requerimento) {
+    public Requerimento cadastrar(Requerimento requerimento) {
+        numeroDeRequerimentoJaCadastrado(requerimento);
+        return repository.save(requerimento);
+    }
+
+    public Requerimento atualizar(Requerimento requerimento) {
+        if (requerimento.getId() == null) {
+            throw new RuntimeException("Requerimento não encontrado.");
+        }
+        findByIdOuErro(requerimento.getId());
         numeroDeRequerimentoJaCadastrado(requerimento);
         return repository.save(requerimento);
     }
