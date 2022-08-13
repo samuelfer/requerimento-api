@@ -48,4 +48,11 @@ public class UsuarioController {
     public ResponseEntity<Usuario> update(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
         return ResponseEntity.ok().body(usuarioService.update(id, usuario));
     }
+
+    @ApiOperation(value = "Inativa usuario")
+    @PutMapping("/inativar")
+    public ResponseEntity<Usuario> inativar(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
+        usuarioService.inativar(id, usuario);
+        return ResponseEntity.ok().body(null);
+    }
 }

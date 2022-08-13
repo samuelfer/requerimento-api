@@ -58,4 +58,9 @@ public class UsuarioService {
     public Long countUsuario() {
         return usuarioRepository.count();
     }
+
+    public void inativar(Long id, Usuario usuario) {
+        findByIdOuErro(id);
+        usuario.setAtivo(false);
+    }
 }
