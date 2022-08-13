@@ -25,7 +25,7 @@ public class TipoPessoaService {
     }
 
     public List<TipoPessoa> listarTodos() {
-        return tipoPessoaRepository.findAll(Sort.by(Sort.Direction.ASC, "descricao"));
+        return tipoPessoaRepository.findByAtivoTrueOrderByDescricao();
     }
 
     public TipoPessoa salvar(TipoPessoa tipoPessoa) {
