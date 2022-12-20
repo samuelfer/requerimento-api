@@ -20,7 +20,7 @@ public class PessoaService {
     }
 
     public List<Pessoa> listarTodos(Long tipoPessoaId) {
-        return pessoaRepository.findByAtivoTrueAndTipoPessoaOrderByNome(tipoPessoaId);
+        return pessoaRepository.findByAtivoTrueAndTipoPessoaIdOrderByNome(tipoPessoaId);
     }
 
     public Pessoa salvar(Pessoa pessoa) {

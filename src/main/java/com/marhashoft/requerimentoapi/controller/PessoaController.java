@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/vereadores")
 public class PessoaController {
 
     @Autowired
     PessoaService pessoaService;
 
-    @GetMapping("/vereadores")
+    @GetMapping
     public List<Pessoa> listarVereadores() {
         return pessoaService.listarTodos(TipoPessoaEnum.TIPO_VEREADOR.getId());
     }
@@ -38,9 +38,10 @@ public class PessoaController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('USUARIO')")
+//    @PreAuthorize("hasAnyRole('USUARIO')")
     @PostMapping
     public ResponseEntity<Requerimento> cadastrar(@Valid @RequestBody Pessoa pessoa) {
+        System.out.println("Pessoa "+pessoa);
         return new ResponseEntity(pessoaService.salvar(pessoa), HttpStatus.CREATED);
     }
 }
