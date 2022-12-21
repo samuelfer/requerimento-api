@@ -3,8 +3,10 @@ package com.marhashoft.requerimentoapi.service;
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
 import com.marhashoft.requerimentoapi.jasper.JasperService;
 import com.marhashoft.requerimentoapi.model.Requerimento;
+import com.marhashoft.requerimentoapi.model.Usuario;
 import com.marhashoft.requerimentoapi.repository.RequerimentoRepository;
 import com.marhashoft.requerimentoapi.shared.GeradorNumeroRequerimentoService;
+import com.marhashoft.requerimentoapi.usuario.UsuarioLogado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ public class RequerimentoService {
     private JasperService jasperService;
     @Autowired
     private GeradorNumeroRequerimentoService geradorNumero;
+    @Autowired
+    private UsuarioService usuarioService;
 
     public Requerimento findByIdOuErro(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Requerimento não encontrado com id " + id));
@@ -33,6 +37,7 @@ public class RequerimentoService {
 
     public Requerimento cadastrar(Requerimento requerimento) {
         numeroDeRequerimentoJaCadastrado(requerimento);
+        requerimento.setUsuario(usuarioService.getusuarioLogadoOuErro());
         return repository.save(requerimento);
     }
 

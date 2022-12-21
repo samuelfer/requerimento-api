@@ -55,4 +55,6 @@ public class UsuarioController {
         usuarioService.inativar(id, usuario);
         return ResponseEntity.ok().body(null);
     }
+
+
 }

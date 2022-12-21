@@ -37,19 +37,19 @@ public class RequerimentoController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('USUARIO')")
+//    @PreAuthorize("hasAnyRole('USUARIO')")
     @PostMapping
     public ResponseEntity<?> cadastrar(@Valid @RequestBody Requerimento requerimento) {
-            return new ResponseEntity<>(requerimentoService.cadastrar(requerimento), HttpStatus.CREATED);
+        return new ResponseEntity<>(requerimentoService.cadastrar(requerimento), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAnyRole('USUARIO')")
+//    @PreAuthorize("hasAnyRole('USUARIO')")
     @PutMapping
     public ResponseEntity<?> atualizar(@Valid @RequestBody Requerimento requerimento) {
         return new ResponseEntity<>(requerimentoService.atualizar(requerimento), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAnyRole('USUARIO')")
+//    @PreAuthorize("hasAnyRole('USUARIO')")
     @GetMapping("/{id}/gerarpdf")
     public void gerarPdf(@PathVariable("id") Long id, HttpServletResponse response) {
         try {
