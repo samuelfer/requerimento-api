@@ -23,7 +23,6 @@ public class PessoaController {
     @GetMapping("/tipo/{tipoPessoaId}")
     public List<Pessoa> listarPessoas(@PathVariable("tipoPessoaId") Long tipoPessoaId) {
         List<Pessoa> pessoas = pessoaService.listarTodos(tipoPessoaId);
-        pessoas.forEach(System.out::println);
         return pessoas;
     }
 
