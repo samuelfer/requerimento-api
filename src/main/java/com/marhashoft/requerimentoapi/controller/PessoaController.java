@@ -1,13 +1,11 @@
 package com.marhashoft.requerimentoapi.controller;
 
-import com.marhashoft.requerimentoapi.TipoPessoaEnum;
 import com.marhashoft.requerimentoapi.model.Pessoa;
 import com.marhashoft.requerimentoapi.model.Requerimento;
 import com.marhashoft.requerimentoapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,15 +14,17 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/vereadores")
+@RequestMapping("/pessoas")
 public class PessoaController {
 
     @Autowired
     PessoaService pessoaService;
 
-    @GetMapping
-    public List<Pessoa> listarVereadores() {
-        return pessoaService.listarTodos(TipoPessoaEnum.TIPO_VEREADOR.getId());
+    @GetMapping("/tipo/{tipoPessoaId}")
+    public List<Pessoa> listarPessoas(@PathVariable("tipoPessoaId") Long tipoPessoaId) {
+        List<Pessoa> pessoas = pessoaService.listarTodos(tipoPessoaId);
+        pessoas.forEach(System.out::println);
+        return pessoas;
     }
 
     @GetMapping("/{id}")
@@ -41,7 +41,6 @@ public class PessoaController {
 //    @PreAuthorize("hasAnyRole('USUARIO')")
     @PostMapping
     public ResponseEntity<Requerimento> cadastrar(@Valid @RequestBody Pessoa pessoa) {
-        System.out.println("Pessoa "+pessoa);
         return new ResponseEntity(pessoaService.salvar(pessoa), HttpStatus.CREATED);
     }
 }
