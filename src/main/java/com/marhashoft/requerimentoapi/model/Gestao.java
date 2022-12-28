@@ -21,7 +21,9 @@ public class Gestao {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_seq")
     private Long id;
 
-    private Pessoa vereador;
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa;
 
     private boolean ativo;
 
