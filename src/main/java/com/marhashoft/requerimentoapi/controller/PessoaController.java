@@ -39,7 +39,7 @@ public class PessoaController {
 
 //    @PreAuthorize("hasAnyRole('USUARIO')")
     @PostMapping
-    public ResponseEntity<Requerimento> cadastrar(@Valid @RequestBody Pessoa pessoa) {
+    public ResponseEntity<Pessoa> cadastrar(@Valid @RequestBody Pessoa pessoa) {
         return new ResponseEntity(pessoaService.salvar(pessoa), HttpStatus.CREATED);
     }
 }
