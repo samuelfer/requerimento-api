@@ -47,7 +47,6 @@ ALTER TABLE public.perfis OWNER TO postgres;
 ALTER TABLE public.perfis ADD CONSTRAINT perfis_usuario FOREIGN KEY (usuario_id) REFERENCES public.usuario(id);
 --##############################################
 
-
 CREATE TABLE IF NOT EXISTS public.pessoa (
 	id int8 NOT NULL,
 	ativo bool NOT NULL,
