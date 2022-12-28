@@ -1,8 +1,9 @@
 package com.marhashoft.requerimentoapi.controller;
 
+import com.marhashoft.requerimentoapi.model.Assessor;
 import com.marhashoft.requerimentoapi.model.Pessoa;
 import com.marhashoft.requerimentoapi.model.Requerimento;
-import com.marhashoft.requerimentoapi.service.PessoaService;
+import com.marhashoft.requerimentoapi.service.AssessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,23 +15,23 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/pessoas")
-public class PessoaController {
+@RequestMapping("/assessores")
+public class AssessorController {
 
     @Autowired
-    PessoaService pessoaService;
+    AssessorService assessorService;
 
-    @GetMapping("/tipo/{tipoPessoaId}")
-    public List<Pessoa> listarPessoas(@PathVariable("tipoPessoaId") Long tipoPessoaId) {
-        List<Pessoa> pessoas = pessoaService.listarTodos(tipoPessoaId);
-        return pessoas;
+    @GetMapping
+    public List<Assessor> listarPessoas() {
+        List<Assessor> assessores = assessorService.listarTodos();
+        return assessores;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarPorId(@PathVariable("id") Long id) {
         try {
-            Pessoa pessoa = pessoaService.findByIdOuErro(id);
-            return new ResponseEntity<>(pessoa, HttpStatus.OK);
+            Assessor assessor = assessorService.findByIdOuErro(id);
+            return new ResponseEntity<>(assessor, HttpStatus.OK);
         } catch (Exception e) {
             Logger.getLogger(e.getMessage());
             return new ResponseEntity<>(Arrays.asList(e.getMessage()), HttpStatus.BAD_REQUEST);
@@ -39,7 +40,7 @@ public class PessoaController {
 
 //    @PreAuthorize("hasAnyRole('USUARIO')")
     @PostMapping
-    public ResponseEntity<Pessoa> cadastrar(@Valid @RequestBody Pessoa pessoa) {
-        return new ResponseEntity(pessoaService.salvar(pessoa), HttpStatus.CREATED);
+    public ResponseEntity<Assessor> cadastrar(@Valid @RequestBody Assessor assessor) {
+        return new ResponseEntity(assessorService.salvar(assessor), HttpStatus.CREATED);
     }
 }
