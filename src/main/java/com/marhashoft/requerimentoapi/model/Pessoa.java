@@ -15,7 +15,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pessoa {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_seq")
