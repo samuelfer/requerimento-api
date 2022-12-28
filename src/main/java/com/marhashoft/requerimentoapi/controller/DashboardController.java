@@ -20,5 +20,4 @@ public class DashboardController {
     public ResponseEntity<DashboardCount> counts() {
         return new ResponseEntity(dashboardService.counts(), HttpStatus.OK);
     }
-
 }
