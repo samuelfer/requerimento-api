@@ -40,8 +40,8 @@ public class CargoController {
         return new ResponseEntity(cargoService.salvar(cargo), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Cargo> atualizar(@PathVariable Long id, @Valid @RequestBody Cargo cargo) {
+    @PutMapping
+    public ResponseEntity<Cargo> atualizar(@Valid @RequestBody Cargo cargo) {
         return new ResponseEntity(cargoService.salvar(cargo), HttpStatus.CREATED);
     }
 }
