@@ -1,7 +1,6 @@
 package com.marhashoft.requerimentoapi.controller;
 
 import com.marhashoft.requerimentoapi.model.Pessoa;
-import com.marhashoft.requerimentoapi.model.Requerimento;
 import com.marhashoft.requerimentoapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

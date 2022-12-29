@@ -24,7 +24,7 @@ public class Pessoa {
 
     @Column(nullable = false)
     private String nome;
-    private String cargo;
+
     private boolean ativo;
 
     @JsonIgnore
@@ -34,4 +34,5 @@ public class Pessoa {
     @ManyToOne
     @JoinColumn(name = "tipo_pessoa_id", foreignKey = @ForeignKey(name = "pessoa_tipo_pessoa"))
     private TipoPessoa tipoPessoa;
+
 }

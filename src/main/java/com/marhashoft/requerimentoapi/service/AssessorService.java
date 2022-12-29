@@ -19,7 +19,7 @@ public class AssessorService {
     PessoaService pessoaService;
 
     public Assessor findByIdOuErro(Long id) {
-        return assessorRepository.findById(id).orElseThrow(() -> new RuntimeException("Assessor não encontrada com id " + id));
+        return assessorRepository.findById(id).orElseThrow(() -> new RuntimeException("Assessor não encontrado com id " + id));
     }
 
     public List<Assessor> listarTodos() {

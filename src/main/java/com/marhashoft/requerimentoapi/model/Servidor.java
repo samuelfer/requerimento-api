@@ -13,13 +13,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name="pessoaId")
-public class Assessor extends Pessoa {
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vereador_id", referencedColumnName = "id")
-    private Pessoa vereador;
+public class Servidor extends Pessoa {
 
     @ManyToOne
-    @JoinColumn(name = "cargo_id", foreignKey = @ForeignKey(name = "assessor_cargo"))
+    @JoinColumn(name = "cargo_id", foreignKey = @ForeignKey(name = "pessoa_cargo"))
     private Cargo cargo;
 }
