@@ -23,8 +23,7 @@ public class AssessorController {
 
     @GetMapping
     public List<Assessor> listarPessoas() {
-        List<Assessor> assessores = assessorService.listarTodos();
-        return assessores;
+        return assessorService.listarTodos();
     }
 
     @GetMapping("/{id}")
