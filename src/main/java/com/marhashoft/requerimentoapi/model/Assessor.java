@@ -18,4 +18,8 @@ public class Assessor extends Pessoa {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "vereador_id", referencedColumnName = "id")
     private Pessoa vereador;
+
+    @ManyToOne
+    @JoinColumn(name = "cargo_id", foreignKey = @ForeignKey(name = "assessor_cargo"))
+    private Cargo cargo;
 }
