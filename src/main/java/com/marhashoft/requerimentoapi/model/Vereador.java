@@ -16,9 +16,6 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name="pessoaId")
 public class Vereador extends Pessoa {
 
-    @OneToMany(mappedBy = "vereador")
-    private List<Assessor> assessorList;
-
     @ManyToOne
     @JoinColumn(name = "cargo_id", foreignKey = @ForeignKey(name = "pessoa_cargo"))
     private Cargo cargo;
