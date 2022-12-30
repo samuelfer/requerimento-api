@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @Getter
@@ -18,10 +21,5 @@ public class Assessor extends Pessoa {
 
     @ManyToOne
     @JoinColumn(name="vereador_id")
-    @JsonIgnore
     private Vereador vereador;
-
-    @ManyToOne
-    @JoinColumn(name = "cargo_id", foreignKey = @ForeignKey(name = "assessor_cargo"))
-    private Cargo cargo;
 }
