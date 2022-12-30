@@ -1,6 +1,5 @@
 package com.marhashoft.requerimentoapi.controller;
 
-import com.marhashoft.requerimentoapi.model.Cargo;
 import com.marhashoft.requerimentoapi.model.Servidor;
 import com.marhashoft.requerimentoapi.service.ServidorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class ServidorController {
     }
 
     @PutMapping
-    public ResponseEntity<Cargo> atualizar(@Valid @RequestBody Servidor servidor) {
+    public ResponseEntity<Servidor> atualizar(@Valid @RequestBody Servidor servidor) {
         return new ResponseEntity(servidorService.atualizar(servidor), HttpStatus.CREATED);
     }
 }

@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -18,6 +16,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name="pessoaId")
 public class Vereador extends Pessoa {
 
-    @OneToMany(mappedBy = "vereador")
-    private List<Assessor> assessorList;
+    @ManyToOne
+    @JoinColumn(name = "cargo_id", foreignKey = @ForeignKey(name = "pessoa_cargo"))
+    private Cargo cargo;
 }
