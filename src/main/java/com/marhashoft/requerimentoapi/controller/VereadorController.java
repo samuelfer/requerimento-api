@@ -40,4 +40,9 @@ public class VereadorController {
     public ResponseEntity<Vereador> cadastrar(@Valid @RequestBody Vereador vereador) {
         return new ResponseEntity(vereadorService.salvar(vereador), HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public ResponseEntity<Vereador> atualizar(@Valid @RequestBody Vereador vereador) {
+        return new ResponseEntity(vereadorService.atualizar(vereador), HttpStatus.CREATED);
+    }
 }
