@@ -1,5 +1,6 @@
 package com.marhashoft.requerimentoapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,9 +16,10 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name="pessoaId")
 public class Assessor extends Pessoa {
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vereador_id", referencedColumnName = "id")
-    private Pessoa vereador;
+    @ManyToOne
+    @JoinColumn(name="vereador_id")
+    @JsonIgnore
+    private Vereador vereador;
 
     @ManyToOne
     @JoinColumn(name = "cargo_id", foreignKey = @ForeignKey(name = "assessor_cargo"))
