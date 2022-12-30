@@ -1,6 +1,5 @@
 package com.marhashoft.requerimentoapi.controller;
 
-import com.marhashoft.requerimentoapi.model.Assessor;
 import com.marhashoft.requerimentoapi.model.Cargo;
 import com.marhashoft.requerimentoapi.model.Servidor;
 import com.marhashoft.requerimentoapi.service.ServidorService;
