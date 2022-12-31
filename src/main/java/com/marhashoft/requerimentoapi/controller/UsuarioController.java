@@ -45,9 +45,9 @@ public class UsuarioController {
     }
 
     @ApiOperation(value = "Atualiza usuario")
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
-        return ResponseEntity.ok().body(usuarioService.update(id, usuario));
+    @PutMapping
+    public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario usuario) {
+        return ResponseEntity.ok().body(usuarioService.update(usuario));
     }
 
     @ApiOperation(value = "Inativa usuario")
