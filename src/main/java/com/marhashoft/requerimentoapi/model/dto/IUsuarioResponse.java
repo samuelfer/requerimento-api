@@ -5,4 +5,5 @@ public interface IUsuarioResponse {
     Long getId();
     String getNome();
     String getEmail();
+    boolean isAtivo();
 }
