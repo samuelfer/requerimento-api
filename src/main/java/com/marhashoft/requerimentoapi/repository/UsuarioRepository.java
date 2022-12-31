@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByEmail(String email);
 
-    @Query(value = "select u.id, u.nome, u.email from usuario u order by u.nome asc", nativeQuery = true)
+    @Query(value = "select u.id, u.nome, u.email, u.ativo from usuario u order by u.nome asc", nativeQuery = true)
     List<IUsuarioResponse> findAllUsuarios();
 
     Optional<IUsuarioResponse> findUsuarioById(Long id);
