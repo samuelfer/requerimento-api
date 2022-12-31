@@ -44,15 +44,15 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario update(Long id, Usuario usuario) {
-        usuario.setId(id);
-        Usuario oldUsuario = findByIdOuErro(id);
-
-        if(!usuario.getSenha().equals(oldUsuario.getSenha())) {
-            oldUsuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
-        }
+    public Usuario update(Usuario usuario) {
+        usuario.setId(usuario.getId());
+        Usuario oldUsuario = findByIdOuErro(usuario.getId());
 
         validaPorEmail(usuario);
+
+        if(usuario.getSenha() != null && !usuario.getSenha().equals(oldUsuario.getSenha())) {
+            oldUsuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
+        }
 
         return usuarioRepository.save(oldUsuario);
     }
