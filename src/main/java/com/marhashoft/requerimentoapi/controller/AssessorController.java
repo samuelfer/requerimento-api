@@ -42,4 +42,9 @@ public class AssessorController {
     public ResponseEntity<Assessor> cadastrar(@Valid @RequestBody Assessor assessor) {
         return new ResponseEntity(assessorService.salvar(assessor), HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public ResponseEntity<Assessor> atualizar(@Valid @RequestBody Assessor assessor) {
+        return new ResponseEntity(assessorService.atualizar(assessor), HttpStatus.CREATED);
+    }
 }

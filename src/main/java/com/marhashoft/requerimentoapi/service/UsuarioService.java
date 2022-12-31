@@ -1,6 +1,7 @@
 package com.marhashoft.requerimentoapi.service;
 
 import com.marhashoft.requerimentoapi.model.Usuario;
+import com.marhashoft.requerimentoapi.model.dto.IUsuarioResponse;
 import com.marhashoft.requerimentoapi.repository.UsuarioRepository;
 import com.marhashoft.requerimentoapi.usuario.UsuarioLogado;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,16 @@ public class UsuarioService {
         return usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado com id " + id));
     }
 
-    public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
+    public IUsuarioResponse findById(Long id) {
+        Optional<IUsuarioResponse> usuario = usuarioRepository.findUsuarioById(id);
+        if (usuario.isEmpty()) {
+            throw new RuntimeException("Usuário não encontrado com id " + id);
+        }
+        return usuario.get();
+    }
+
+    public List<IUsuarioResponse> findAll() {
+        return usuarioRepository.findAllUsuarios();
     }
 
     public Usuario create(Usuario usuario) {
@@ -35,15 +44,15 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario update(Long id, Usuario usuario) {
-        usuario.setId(id);
-        Usuario oldUsuario = findByIdOuErro(id);
-
-        if(!usuario.getSenha().equals(oldUsuario.getSenha())) {
-            oldUsuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
-        }
+    public Usuario update(Usuario usuario) {
+        usuario.setId(usuario.getId());
+        Usuario oldUsuario = findByIdOuErro(usuario.getId());
 
         validaPorEmail(usuario);
+
+        if(usuario.getSenha() != null && !usuario.getSenha().equals(oldUsuario.getSenha())) {
+            oldUsuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
+        }
 
         return usuarioRepository.save(oldUsuario);
     }

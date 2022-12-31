@@ -1,6 +1,7 @@
 package com.marhashoft.requerimentoapi.controller;
 
 import com.marhashoft.requerimentoapi.model.Usuario;
+import com.marhashoft.requerimentoapi.model.dto.IUsuarioResponse;
 import com.marhashoft.requerimentoapi.service.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,13 +26,13 @@ public class UsuarioController {
 
     @ApiOperation(value = "Retorna usuario por id")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(usuarioService.findByIdOuErro(id));
+    public ResponseEntity<IUsuarioResponse> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(usuarioService.findById(id));
     }
 
     @ApiOperation(value = "Retorna todos usuarios")
     @GetMapping
-    public ResponseEntity<List<Usuario>> findAll() {
+    public ResponseEntity<List<IUsuarioResponse>> findAll() {
         return ResponseEntity.ok().body(usuarioService.findAll());
     }
 
@@ -44,9 +45,9 @@ public class UsuarioController {
     }
 
     @ApiOperation(value = "Atualiza usuario")
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
-        return ResponseEntity.ok().body(usuarioService.update(id, usuario));
+    @PutMapping
+    public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario usuario) {
+        return ResponseEntity.ok().body(usuarioService.update(usuario));
     }
 
     @ApiOperation(value = "Inativa usuario")
