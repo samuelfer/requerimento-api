@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_seq")
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "O campo nome é obrigatório")
     private String nome;
 
     private boolean ativo;
