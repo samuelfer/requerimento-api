@@ -14,13 +14,13 @@ public class UsuarioDTO {
 
     protected Long id;
 
-    @NotNull(message = "O campo NOME é requerido")
+    @NotNull(message = "O campo nome é obrigatório")
     protected String nome;
 
-    @NotNull(message = "O campo EMAIL é requerido")
+    @NotNull(message = "O campo email é obrigatório")
     protected String email;
 
-    @NotNull(message = "O campo SENHA é requerido")
+    @NotNull(message = "O campo senha é obrigatório")
     protected String senha;
 
     protected Set<Integer> perfis = new HashSet<>();
