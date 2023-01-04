@@ -1,17 +1,13 @@
 package com.marhashoft.requerimentoapi.model.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.marhashoft.requerimentoapi.model.Cargo;
-import com.marhashoft.requerimentoapi.model.PessoaCargo;
 import com.marhashoft.requerimentoapi.model.TipoPessoa;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Getter
 @Setter
