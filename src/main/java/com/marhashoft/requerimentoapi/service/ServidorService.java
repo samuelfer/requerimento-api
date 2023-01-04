@@ -2,7 +2,9 @@ package com.marhashoft.requerimentoapi.service;
 
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
 import com.marhashoft.requerimentoapi.model.Servidor;
+import com.marhashoft.requerimentoapi.model.dto.ServidorDTO;
 import com.marhashoft.requerimentoapi.repository.ServidorRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,9 @@ import java.util.Optional;
 public class ServidorService {
 
     @Autowired
-    ServidorRepository servidorRepository;
+    private ServidorRepository servidorRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     public Servidor findByIdOuErro(Long id) {
         return servidorRepository.findById(id).orElseThrow(() -> new RuntimeException("Servidor não encontrado com id " + id));
@@ -24,23 +28,25 @@ public class ServidorService {
         return servidorRepository.findAll(Sort.by(Sort.Direction.DESC, "nome"));
     }
 
-    public Servidor salvar(Servidor servidor) {
-        servidorJaCadastrado(servidor);
-        servidor.setAtivo(true);
+    public Servidor salvar(ServidorDTO servidorDTO) {
+        servidorJaCadastrado(servidorDTO);
+        servidorDTO.setAtivo(true);
+        Servidor servidor = modelMapper.map(servidorDTO, Servidor.class);
         return servidorRepository.save(servidor);
     }
 
-    public Servidor atualizar(Servidor servidor) {
-        servidorJaCadastrado(servidor);
+    public Servidor atualizar(ServidorDTO servidorDTO) {
+        servidorJaCadastrado(servidorDTO);
+        Servidor servidor = modelMapper.map(servidorDTO, Servidor.class);
         return servidorRepository.save(servidor);
     }
 
-    private void servidorJaCadastrado(Servidor servidor) {
-        Optional<Servidor> servidorExists = servidorRepository.findByNome(servidor.getNome());
+    private void servidorJaCadastrado(ServidorDTO servidorDTO) {
+        Optional<Servidor> servidorExists = servidorRepository.findByNome(servidorDTO.getNome());
 
-        if (servidorExists.isPresent() && !servidorExists.get().getId().equals(servidor.getId())) {
+        if (servidorExists.isPresent() && !servidorExists.get().getId().equals(servidorDTO.getId())) {
             throw new DataIntegrationViolationApiException("O servidor  "
-                    + servidor.getNome() + " já foi cadastrado no sistema!");
+                    + servidorDTO.getNome() + " já foi cadastrado no sistema!");
         }
     }
 }
