@@ -1,6 +1,8 @@
 package com.marhashoft.requerimentoapi.service;
 
+import com.marhashoft.requerimentoapi.CargoEnum;
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
+import com.marhashoft.requerimentoapi.model.Cargo;
 import com.marhashoft.requerimentoapi.model.Vereador;
 import com.marhashoft.requerimentoapi.repository.VereadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import java.util.Optional;
 public class VereadorService {
 
     @Autowired
-    VereadorRepository vereadorRepository;
+    private VereadorRepository vereadorRepository;
+    @Autowired
+    private CargoService cargoService;
 
     public Vereador findByIdOuErro(Long id) {
         return vereadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Vereador não encontrado com id " + id));
@@ -27,6 +31,10 @@ public class VereadorService {
     public Vereador salvar(Vereador vereador) {
         vereadorJaCadastrado(vereador);
         vereador.setAtivo(true);
+        if (vereador.getCargo().getDescricao() == null) {
+            Cargo cargo = cargoService.findByIdOuErro(CargoEnum.VEREADOR.getId());
+            vereador.setCargo(cargo);
+        }
         return vereadorRepository.save(vereador);
     }
 
