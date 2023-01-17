@@ -1,5 +1,6 @@
 package com.marhashoft.requerimentoapi.jasper;
 
+import com.marhashoft.requerimentoapi.model.Oficio;
 import com.marhashoft.requerimentoapi.model.Requerimento;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -54,8 +55,46 @@ public class JasperService {
         downloadArquivo(file, response);
     }
 
+    public void gerarPdf(Oficio oficio, HttpServletResponse response,
+                               String caminhoArquivo, String nomeArquivo)  throws Exception {
+        Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + "/jasper/"+caminhoArquivo);
+
+        JasperReport report = (JasperReport) JRLoader.loadObject(resource.getInputStream());
+
+        JRBeanCollectionDataSource dataSource =
+                new JRBeanCollectionDataSource(Collections.singletonList(""));
+
+        JasperPrint pdfRequerimentoPreenchido = JasperFillManager
+                .fillReport(report, preencherParametros(oficio), dataSource);
+
+        byte[] pdfByteArray =  JasperExportManager.exportReportToPdf(pdfRequerimentoPreenchido);
+
+        File file = transformeByteParaFile(pdfByteArray, oficio, nomeArquivo);
+        downloadArquivo(file, response);
+    }
+
     public File transformeByteParaFile(byte[] pdfByteArray, Requerimento requerimento, String nomeArquivo) {
         File file = new File (nomeArquivo+requerimento.getId()+".pdf");
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream (file);
+            fileOutputStream.write (pdfByteArray);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException ex) {
+
+                }
+            }
+        }
+        return file;
+    }
+
+    public File transformeByteParaFile(byte[] pdfByteArray, Oficio oficio, String nomeArquivo) {
+        File file = new File (nomeArquivo+oficio.getId()+".pdf");
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream (file);
@@ -82,6 +121,20 @@ public class JasperService {
         parametros.put("numero", "Req. Nº. "+requerimento.getNumero());
         parametros.put("pessoa", requerimento.getPessoa().getNome());
         parametros.put("textoPadraoPessoa", "\t"+requerimento.getPessoa().getNome()
+                +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
+        parametros.put("textoPadrao", "\t"+"O requerente pede o apoio unânime de seus pares na aprovação do presente pedido bem como por parte do Poder Executivo Municipal" +
+                "\n\nSala das Sessões da Câmara Municipal de Mamanguape, em "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
+        return parametros;
+    }
+
+    private Map<String, Object> preencherParametros(Oficio oficio) {
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
+        parametros.put("assunto", oficio.getAssunto());
+        parametros.put("numero", "Req. Nº. "+oficio.getNumero());
+        parametros.put("pessoa", oficio.getPessoa().getNome());
+        parametros.put("destinatario", oficio.getDestinatario());
+        parametros.put("textoPadraoPessoa", "\t"+oficio.getPessoa().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
         parametros.put("textoPadrao", "\t"+"O requerente pede o apoio unânime de seus pares na aprovação do presente pedido bem como por parte do Poder Executivo Municipal" +
                 "\n\nSala das Sessões da Câmara Municipal de Mamanguape, em "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
