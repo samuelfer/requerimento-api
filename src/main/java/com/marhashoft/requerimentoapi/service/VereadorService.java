@@ -4,7 +4,9 @@ import com.marhashoft.requerimentoapi.CargoEnum;
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
 import com.marhashoft.requerimentoapi.model.Cargo;
 import com.marhashoft.requerimentoapi.model.Vereador;
+import com.marhashoft.requerimentoapi.model.dto.VereadorDTO;
 import com.marhashoft.requerimentoapi.repository.VereadorRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ public class VereadorService {
     private VereadorRepository vereadorRepository;
     @Autowired
     private CargoService cargoService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     public Vereador findByIdOuErro(Long id) {
         return vereadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Vereador não encontrado com id " + id));
@@ -28,27 +32,29 @@ public class VereadorService {
         return vereadorRepository.findAll(Sort.by(Sort.Direction.DESC, "nome"));
     }
 
-    public Vereador salvar(Vereador vereador) {
-        vereadorJaCadastrado(vereador);
-        vereador.setAtivo(true);
-        if (vereador.getCargo().getDescricao() == null) {
+    public Vereador salvar(VereadorDTO vereadorDTO) {
+        vereadorJaCadastrado(vereadorDTO);
+        vereadorDTO.setAtivo(true);
+        if (vereadorDTO.getCargo().getDescricao() == null) {
             Cargo cargo = cargoService.findByIdOuErro(CargoEnum.VEREADOR.getId());
-            vereador.setCargo(cargo);
+            vereadorDTO.setCargo(cargo);
         }
+        Vereador vereador = modelMapper.map(vereadorDTO, Vereador.class);
         return vereadorRepository.save(vereador);
     }
 
-    public Vereador atualizar(Vereador vereador) {
-        vereadorJaCadastrado(vereador);
+    public Vereador atualizar(VereadorDTO vereadorDTO) {
+        vereadorJaCadastrado(vereadorDTO);
+        Vereador vereador = modelMapper.map(vereadorDTO, Vereador.class);
         return vereadorRepository.save(vereador);
     }
 
-    private void vereadorJaCadastrado(Vereador vereador) {
-        Optional<Vereador> servidorExists = vereadorRepository.findByNome(vereador.getNome());
+    private void vereadorJaCadastrado(VereadorDTO vereadorDTO) {
+        Optional<Vereador> servidorExists = vereadorRepository.findByNome(vereadorDTO.getNome());
 
-        if (servidorExists.isPresent() && !servidorExists.get().getId().equals(vereador.getId())) {
+        if (servidorExists.isPresent() && !servidorExists.get().getId().equals(vereadorDTO.getId())) {
             throw new DataIntegrationViolationApiException("O vereador  "
-                    + vereador.getNome() + " já foi cadastrado no sistema!");
+                    + vereadorDTO.getNome() + " já foi cadastrado no sistema!");
         }
     }
 }

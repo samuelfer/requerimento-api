@@ -7,23 +7,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VereadorDTO {
+public class ServidorDTO {
 
     private Long id;
 
-    @NotBlank(message = "O campo nome do vereador é obrigatório")
+    @NotBlank(message = "O campo nome é obrigatório")
     private String nome;
+
+    @Valid
+    private Cargo cargo;
 
     private boolean ativo;
 
     private TipoPessoa tipoPessoa;
-
-    private Cargo cargo;
-
 }
