@@ -21,7 +21,7 @@ public class PessoaController {
 
     @GetMapping("/tipo/{tipoPessoaId}")
     public List<Pessoa> listarPessoas(@PathVariable("tipoPessoaId") Long tipoPessoaId) {
-        List<Pessoa> pessoas = pessoaService.listarTodos(tipoPessoaId);
+        List<Pessoa> pessoas = pessoaService.listarTodos(Arrays.asList(tipoPessoaId));
         return pessoas;
     }
 

@@ -18,8 +18,8 @@ public class PessoaService {
         return pessoaRepository.findById(id).orElseThrow(() -> new RuntimeException("Vereador não encontrada com id " + id));
     }
 
-    public List<Pessoa> listarTodos(Long tipoPessoaId) {
-        return pessoaRepository.findByAtivoTrueAndTipoPessoaIdOrderByNome(tipoPessoaId);
+    public List<Pessoa> listarTodos(List<Long> tiposPessoaId) {
+        return pessoaRepository.findByAtivoTrueAndTipoPessoaIdInOrderByNome(tiposPessoaId);
     }
 
     public Pessoa salvar(Pessoa pessoa) {

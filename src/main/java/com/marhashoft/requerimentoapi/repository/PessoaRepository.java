@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
-    List<Pessoa> findByAtivoTrueAndTipoPessoaIdOrderByNome(Long tipoPessoaId);
+    List<Pessoa> findByAtivoTrueAndTipoPessoaIdInOrderByNome(List<Long> tiposPessoaId);
 
     Long countByTipoPessoaId(Long tipoPessoaId);
 }
