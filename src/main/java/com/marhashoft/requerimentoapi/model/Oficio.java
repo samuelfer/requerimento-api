@@ -26,6 +26,11 @@ public class Oficio {
     @Column(nullable = false, columnDefinition = "text")
     @NotEmpty
     @Size(min = 5, message = "Assunto precisa ter no mínimo 5 caracteres")
+    private String texto;
+
+    @Column(nullable = false, columnDefinition = "text")
+    @NotEmpty
+    @Size(min = 5, message = "Assunto precisa ter no mínimo 5 caracteres")
     private String assunto;
 
     private String numero;
