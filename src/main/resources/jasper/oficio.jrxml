@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.12.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c14896b-0208-47b4-a7b1-336d79a69d68">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="assunto" class="java.lang.String">
+		<parameterDescription><![CDATA[assunto]]></parameterDescription>
+	</parameter>
+	<parameter name="numero" class="java.lang.String">
+		<parameterDescription><![CDATA[numero]]></parameterDescription>
+	</parameter>
+	<parameter name="pessoa" class="java.lang.String">
+		<parameterDescription><![CDATA[pessoa]]></parameterDescription>
+	</parameter>
+	<parameter name="textoPadrao" class="java.lang.String">
+		<parameterDescription><![CDATA[textoPadrao]]></parameterDescription>
+	</parameter>
+	<parameter name="textoPadraoPessoa" class="java.lang.String">
+		<parameterDescription><![CDATA[textoPadraoPessoa]]></parameterDescription>
+	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="localAndData" class="java.lang.String"/>
+	<parameter name="texto" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="370" splitType="Stretch">
+			<textField>
+				<reportElement x="49" y="182" width="100" height="22" uuid="31ac56e9-f179-4d85-b974-040c5e505c9a"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numero}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="219" y="2" width="120" height="111" uuid="6872d136-4a9d-43e6-9a20-3ffc96ac989b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="130" y="116" width="300" height="50" uuid="d6f6c6c8-90c3-442f-a551-48b8bb62f785"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO DA PARAÍBA
+CÂMARA MUNICIPAL DE MAMANGUAPE
+“CASA SENADOR RUI CARNEIRO”
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="310" width="460" height="44" uuid="dff88445-e2a2-45e5-993c-31b8ba1410c0">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement markup="none">
+					<font fontName="Calibri" size="12"/>
+					<paragraph firstLineIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{textoPadraoPessoa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="208" width="211" height="30" uuid="275ba4de-7756-4ce0-b4f2-86be36d52ba3"/>
+				<textFieldExpression><![CDATA[$P{localAndData}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="142" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="51" y="-126" width="460" height="33" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Calibri" size="12"/>
+					<paragraph firstLineIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{assunto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="30" width="464" height="80" uuid="53d12d5a-b35b-4667-95f1-cb4d12436fd4"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$P{texto}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="54">
+			<staticText>
+				<reportElement x="47" y="17" width="100" height="30" uuid="54240e5f-3a1e-46b6-b8c0-0c13cbca0e0c"/>
+				<text><![CDATA[Atenciosamente,]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="51" splitType="Stretch">
+			<textField>
+				<reportElement stretchType="ElementGroupHeight" x="168" y="3" width="310" height="18" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pessoa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="232" y="22" width="100" height="16" uuid="02283a7f-acfd-43d4-9e96-1fd1aa84d1c7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Vereador(a)]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>
