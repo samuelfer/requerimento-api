@@ -1,7 +1,7 @@
 package com.marhashoft.requerimentoapi.controller;
 
 import com.marhashoft.requerimentoapi.model.Oficio;
-import com.marhashoft.requerimentoapi.model.Requerimento;
+import com.marhashoft.requerimentoapi.model.Pessoa;
 import com.marhashoft.requerimentoapi.service.OficioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -30,6 +29,11 @@ public class OficioController {
     public ResponseEntity<Oficio> listarPorId(@PathVariable("id") Long id) {
         Oficio oficio = oficioService.findByIdOuErro(id);
         return new ResponseEntity<>(oficio, HttpStatus.OK);
+    }
+
+    @GetMapping("/assinantes")
+    public List<Pessoa> listarAssinantes() {
+        return oficioService.listarAssinantesOficio();
     }
 
     //    @PreAuthorize("hasAnyRole('USUARIO')")

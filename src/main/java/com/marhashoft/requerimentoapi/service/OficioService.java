@@ -1,15 +1,17 @@
 package com.marhashoft.requerimentoapi.service;
 
+import com.marhashoft.requerimentoapi.TipoPessoaEnum;
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
 import com.marhashoft.requerimentoapi.jasper.JasperService;
 import com.marhashoft.requerimentoapi.model.Oficio;
-import com.marhashoft.requerimentoapi.model.Requerimento;
+import com.marhashoft.requerimentoapi.model.Pessoa;
 import com.marhashoft.requerimentoapi.repository.OficioRepository;
 import com.marhashoft.requerimentoapi.shared.GeradorNumeroRequerimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,8 @@ public class OficioService {
     private GeradorNumeroRequerimentoService geradorNumero;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private PessoaService pessoaService;
 
     public Oficio findByIdOuErro(Long id) {
         return oficioRepository.findById(id).orElseThrow(() -> new RuntimeException("Ofício não encontrado com id " + id));
@@ -67,5 +71,9 @@ public class OficioService {
                         + oficio.getNumero() + " já foi cadastrado no sistema!");
             }
         }
+    }
+
+    public List<Pessoa> listarAssinantesOficio() {
+        return pessoaService.listarTodos(Arrays.asList(TipoPessoaEnum.TIPO_VEREADOR.getId(), TipoPessoaEnum.TIPO_SERVIDOR.getId()));
     }
 }
