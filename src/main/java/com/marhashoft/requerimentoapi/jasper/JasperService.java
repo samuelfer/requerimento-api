@@ -2,6 +2,7 @@ package com.marhashoft.requerimentoapi.jasper;
 
 import com.marhashoft.requerimentoapi.model.Oficio;
 import com.marhashoft.requerimentoapi.model.Requerimento;
+import com.marhashoft.requerimentoapi.util.DateUtil;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -130,14 +131,15 @@ public class JasperService {
     private Map<String, Object> preencherParametros(Oficio oficio) {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
+        parametros.put("localAndData", "Mamanguape em, "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(DateUtil.transformeParaDate(oficio.getDataOficio()))+".");
         parametros.put("assunto", oficio.getAssunto());
-        parametros.put("numero", "Req. Nº. "+oficio.getNumero());
+        parametros.put("texto", oficio.getTexto());
+        parametros.put("numero", "Ofício "+oficio.getNumero());
         parametros.put("pessoa", oficio.getPessoa().getNome());
+        parametros.put("cargoPessoa", "Informar o cargo");
         parametros.put("destinatario", oficio.getDestinatario());
-        parametros.put("textoPadraoPessoa", "\t"+oficio.getPessoa().getNome()
-                +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
-        parametros.put("textoPadrao", "\t"+"O requerente pede o apoio unânime de seus pares na aprovação do presente pedido bem como por parte do Poder Executivo Municipal" +
-                "\n\nSala das Sessões da Câmara Municipal de Mamanguape, em "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
+        parametros.put("textoPadraoPessoa", "Venho através deste, mui respeitosamente encaminhar a esta Edilidade");
+        parametros.put("textoPadrao", "\t"+"Qualquer eventual dúvida estamos à disposição. Certo do seu pronto atendimento, elevo votos de alta estima.");
         return parametros;
     }
 
