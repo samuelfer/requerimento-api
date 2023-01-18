@@ -1,9 +1,10 @@
 CREATE TABLE IF NOT EXISTS public.requerimento (
 	id int8 NOT NULL,
+	texto text NOT NULL,
 	assunto text NOT NULL,
 	data_oficio timestamp NULL,
 	numero varchar(255) NULL,
-	pessoa_id int8 NOT NULL,
+	assinante_id int8 NOT NULL,
 	usuario_id int8 NOT NULL,
 	destinatario  text NOT NULL,
 	CONSTRAINT requerimento_pkey PRIMARY KEY (id)
