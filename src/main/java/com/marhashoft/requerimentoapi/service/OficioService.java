@@ -76,4 +76,8 @@ public class OficioService {
     public List<Pessoa> listarAssinantesOficio() {
         return pessoaService.listarTodos(Arrays.asList(TipoPessoaEnum.TIPO_VEREADOR.getId(), TipoPessoaEnum.TIPO_SERVIDOR.getId()));
     }
+
+    public Optional<Oficio> findById(Long id) {
+        return oficioRepository.findById(id);
+    }
 }
