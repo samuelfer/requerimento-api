@@ -3,12 +3,11 @@ package com.marhashoft.requerimentoapi.jasper;
 import com.marhashoft.requerimentoapi.model.Oficio;
 import com.marhashoft.requerimentoapi.model.Requerimento;
 import com.marhashoft.requerimentoapi.util.DateUtil;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -57,21 +56,25 @@ public class JasperService {
     }
 
     public void gerarPdf(Oficio oficio, HttpServletResponse response,
-                               String caminhoArquivo, String nomeArquivo)  throws Exception {
-        Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + "/jasper/"+caminhoArquivo);
+                               String caminhoArquivo, String nomeArquivo) {
+        try {
+            Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + "/jasper/"+caminhoArquivo);
 
-        JasperReport report = (JasperReport) JRLoader.loadObject(resource.getInputStream());
+            JasperReport report = (JasperReport) JRLoader.loadObject(resource.getInputStream());
 
-        JRBeanCollectionDataSource dataSource =
-                new JRBeanCollectionDataSource(Collections.singletonList(""));
+            JRBeanCollectionDataSource dataSource =
+                    new JRBeanCollectionDataSource(Collections.singletonList(""));
 
-        JasperPrint pdfRequerimentoPreenchido = JasperFillManager
-                .fillReport(report, preencherParametros(oficio), dataSource);
+            JasperPrint pdfRequerimentoPreenchido = JasperFillManager
+                    .fillReport(report, preencherParametros(oficio), dataSource);
 
-        byte[] pdfByteArray =  JasperExportManager.exportReportToPdf(pdfRequerimentoPreenchido);
+            byte[] pdfByteArray =  JasperExportManager.exportReportToPdf(pdfRequerimentoPreenchido);
 
-        File file = transformeByteParaFile(pdfByteArray, oficio, nomeArquivo);
-        downloadArquivo(file, response);
+            File file = transformeByteParaFile(pdfByteArray, oficio, nomeArquivo);
+            downloadArquivo(file, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public File transformeByteParaFile(byte[] pdfByteArray, Requerimento requerimento, String nomeArquivo) {
@@ -114,7 +117,6 @@ public class JasperService {
         return file;
     }
 
-
     private Map<String, Object> preencherParametros(Requerimento requerimento) {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
@@ -135,7 +137,7 @@ public class JasperService {
         parametros.put("assunto", oficio.getAssunto());
         parametros.put("texto", oficio.getTexto());
         parametros.put("numero", "Ofício "+oficio.getNumero());
-        parametros.put("pessoa", oficio.getPessoa().getNome());
+        parametros.put("assinante", oficio.getAssinante().getNome());
         parametros.put("cargoPessoa", "Informar o cargo");
         parametros.put("destinatario", oficio.getDestinatario());
         parametros.put("textoPadraoPessoa", "Venho através deste, mui respeitosamente encaminhar a esta Edilidade");
@@ -143,11 +145,15 @@ public class JasperService {
         return parametros;
     }
 
-    public void downloadArquivo(File arquivo, HttpServletResponse response) throws Exception {
-        response.setContentType(APPLICATION_PDF_VALUE);
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + arquivo.getName() + "\"");
-        IOUtils.copy(new FileInputStream(arquivo), response.getOutputStream());
-        response.flushBuffer();
+    public void downloadArquivo(File arquivo, HttpServletResponse response) {
+        try {
+            response.setContentType(APPLICATION_PDF_VALUE);
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + arquivo.getName() + "\"");
+            IOUtils.copy(new FileInputStream(arquivo), response.getOutputStream());
+            response.flushBuffer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private String getResourcePath(String property) {
@@ -156,5 +162,35 @@ public class JasperService {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    public byte[] gerarPDF(Oficio arquivo) throws Exception {
+        Map<String, Object> parametros =
+                preencherParametros(arquivo);
+
+        return gerarPDFByteArray(parametros, "oficio.jrxml");
+    }
+
+    public byte[] gerarPDF(Requerimento requerimento) throws Exception {
+        Map<String, Object> parametros =
+                preencherParametros(requerimento);
+
+        return gerarPDFByteArray(parametros, "requerimento.jrxml");
+    }
+
+    private byte[] gerarPDFByteArray(Map<String, Object> parameters, String caminhoJasper)
+            throws Exception {
+        JasperReport report = carregarJasper(caminhoJasper);
+        JRBeanCollectionDataSource dataSource =
+                new JRBeanCollectionDataSource(Collections.singletonList(""));
+        JasperPrint print = JasperFillManager.fillReport(report, parameters, dataSource);
+        return JasperExportManager.exportReportToPdf(print);
+    }
+
+    private JasperReport carregarJasper(String caminho) throws JRException {
+        final JasperDesign jasperDesignMaster =
+                JRXmlLoader.load(JasperService.class.getResourceAsStream("/jasper/"+caminho));
+
+        return JasperCompileManager.compileReport(jasperDesignMaster);
     }
 }
