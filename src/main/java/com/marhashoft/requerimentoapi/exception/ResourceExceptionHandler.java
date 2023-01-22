@@ -1,9 +1,7 @@
 package com.marhashoft.requerimentoapi.exception;
 
 import org.hibernate.ObjectNotFoundException;
-import org.hibernate.TransientPropertyValueException;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
