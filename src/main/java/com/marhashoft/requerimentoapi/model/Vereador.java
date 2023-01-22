@@ -18,4 +18,6 @@ public class Vereador extends Pessoa {
     @ManyToOne
     @JoinColumn(name = "cargo_id", foreignKey = @ForeignKey(name = "pessoa_cargo"))
     private Cargo cargo;
+
+    private String arquivoAssinatura;
 }

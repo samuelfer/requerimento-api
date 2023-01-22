@@ -39,11 +39,13 @@ public class Oficio {
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "assinante_id", nullable=false)
-    private Pessoa pessoa;
+    private Pessoa assinante;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "usuario_id", nullable=false)
     private Usuario usuario;
 
     private String destinatario;
+
+    private String cargoDestinatario;
 }

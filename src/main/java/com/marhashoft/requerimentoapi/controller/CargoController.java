@@ -25,14 +25,8 @@ public class CargoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> listarPorId(@PathVariable("id") Long id) {
-        try {
-            Cargo cargo = cargoService.findByIdOuErro(id);
-            return new ResponseEntity<>(cargo, HttpStatus.OK);
-        } catch (Exception e) {
-            Logger.getLogger(e.getMessage());
-            return new ResponseEntity<>(Arrays.asList(e.getMessage()), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<Cargo> listarPorId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(cargoService.findByIdOuErro(id), HttpStatus.OK);
     }
 
     @PostMapping

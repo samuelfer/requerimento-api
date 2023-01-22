@@ -8,8 +8,8 @@
 	<parameter name="numero" class="java.lang.String">
 		<parameterDescription><![CDATA[numero]]></parameterDescription>
 	</parameter>
-	<parameter name="pessoa" class="java.lang.String">
-		<parameterDescription><![CDATA[pessoa]]></parameterDescription>
+	<parameter name="assinante" class="java.lang.String">
+		<parameterDescription><![CDATA[assinante]]></parameterDescription>
 	</parameter>
 	<parameter name="textoPadrao" class="java.lang.String">
 		<parameterDescription><![CDATA[textoPadrao]]></parameterDescription>
@@ -100,7 +100,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 				<textElement textAlignment="Left">
 					<font fontName="Calibri" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{pessoa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{assinante}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="232" y="22" width="100" height="16" uuid="02283a7f-acfd-43d4-9e96-1fd1aa84d1c7"/>
