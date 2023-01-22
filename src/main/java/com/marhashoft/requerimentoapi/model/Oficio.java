@@ -46,4 +46,6 @@ public class Oficio {
     private Usuario usuario;
 
     private String destinatario;
+
+    private String cargoDestinatario;
 }
