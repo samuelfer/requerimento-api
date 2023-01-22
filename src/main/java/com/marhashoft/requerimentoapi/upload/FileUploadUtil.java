@@ -18,7 +18,7 @@ public class FileUploadUtil {
         String fileCode = RandomStringUtils.randomAlphanumeric(8);
 
         try(InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadDirectory.resolve(fileCode + "-" + fileName);
+            Path filePath = uploadDirectory.resolve(fileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new IOException("Erro ao tentar salvar o arquivo: "+ fileName, e);
