@@ -20,7 +20,8 @@ public class Arquivo {
     private Long id;
     private String nome;
     private String url;
-    private String tipo;
+    private String extension;
     private long size;
     private boolean ativo;
+    private String tipoArquivo;//Se eh imagem de vereador, assinatura de vereador, ou outro tipo
 }

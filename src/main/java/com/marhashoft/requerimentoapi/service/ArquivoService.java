@@ -1,5 +1,6 @@
 package com.marhashoft.requerimentoapi.service;
 
+import com.marhashoft.requerimentoapi.enums.TipoArquivoEnum;
 import com.marhashoft.requerimentoapi.model.Arquivo;
 import com.marhashoft.requerimentoapi.repository.ArquivoRepository;
 import com.marhashoft.requerimentoapi.util.ArquivoUtil;
@@ -20,7 +21,8 @@ public class ArquivoService {
         arquivoNovo.setSize(multipartFile.getSize());
         arquivoNovo.setUrl(nomeArquivo);
         arquivoNovo.setAtivo(true);
-        arquivoNovo.setTipo(ArquivoUtil.getExtensionArquivo(nomeArquivo));
+        arquivoNovo.setExtension(ArquivoUtil.getExtensionArquivo(nomeArquivo));
+        arquivoNovo.setTipoArquivo(TipoArquivoEnum.FOTO_VEREADOR.getNome());
 
         return arquivoRepository.save(arquivoNovo);
     }
