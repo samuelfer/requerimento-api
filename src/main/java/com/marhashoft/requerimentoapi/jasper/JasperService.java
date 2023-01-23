@@ -2,6 +2,7 @@ package com.marhashoft.requerimentoapi.jasper;
 
 import com.marhashoft.requerimentoapi.model.Oficio;
 import com.marhashoft.requerimentoapi.model.Requerimento;
+import com.marhashoft.requerimentoapi.service.ConfiguracaoService;
 import com.marhashoft.requerimentoapi.util.DateUtil;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -35,6 +36,8 @@ public class JasperService {
     private ResourceLoader resourceLoader;
     @Autowired
     private JasperPropriedades jasperPropriedades;
+    @Autowired
+    private ConfiguracaoService configuracaoService;
 
 
     public void gerarPdf(Requerimento requerimento, HttpServletResponse response,
@@ -123,10 +126,12 @@ public class JasperService {
         parametros.put("assunto", requerimento.getAssunto());
         parametros.put("numero", "Req. Nº. "+requerimento.getNumero());
         parametros.put("pessoa", requerimento.getPessoa().getNome());
+
+        String textoPadraoRequerimento = configuracaoService.findConfiguracao().getTextoPadraoRequerimento();
+
         parametros.put("textoPadraoPessoa", "\t"+requerimento.getPessoa().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
-        parametros.put("textoPadrao", "\t"+"O requerente pede o apoio unânime de seus pares na aprovação do presente pedido bem como por parte do Poder Executivo Municipal" +
-                "\n\nSala das Sessões da Câmara Municipal de Mamanguape, em "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
+        parametros.put("textoPadrao", "\t"+(!textoPadraoRequerimento.isEmpty() ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
         return parametros;
     }
 
@@ -141,7 +146,9 @@ public class JasperService {
         parametros.put("cargoPessoa", "Informar o cargo");
         parametros.put("destinatario", oficio.getDestinatario());
         parametros.put("textoPadraoPessoa", "Venho através deste, mui respeitosamente encaminhar a esta Edilidade");
-        parametros.put("textoPadrao", "\t"+"Qualquer eventual dúvida estamos à disposição. Certo do seu pronto atendimento, elevo votos de alta estima.");
+
+        String textoPadraoOficio = configuracaoService.findConfiguracao().getTextoPadraoOficio();
+        parametros.put("textoPadrao", "\t"+(!textoPadraoOficio.isEmpty() ? textoPadraoOficio : ""));
         return parametros;
     }
 
@@ -192,5 +199,9 @@ public class JasperService {
                 JRXmlLoader.load(JasperService.class.getResourceAsStream("/jasper/"+caminho));
 
         return JasperCompileManager.compileReport(jasperDesignMaster);
+    }
+
+    private void preencherParametrosPadraoPdf(Map<String, Object> parametros) {
+//        parametros.put("logo", getResourcePath(this.properties.getLogotipo()));
     }
 }
