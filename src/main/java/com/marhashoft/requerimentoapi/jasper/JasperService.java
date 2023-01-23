@@ -124,8 +124,8 @@ public class JasperService {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
         parametros.put("assunto", requerimento.getAssunto());
-        parametros.put("numero", "Req. Nº. "+requerimento.getNumero());
-        parametros.put("pessoa", requerimento.getPessoa().getNome());
+        parametros.put("numero", "<html><b>Req. Nº. "+requerimento.getNumero() + "</b></html>");
+        parametros.put("pessoa", "<html><b>" + requerimento.getPessoa().getNome() + "</b></html>");
 
         String textoPadraoRequerimento = configuracaoService.findConfiguracao().getTextoPadraoRequerimento();
 
