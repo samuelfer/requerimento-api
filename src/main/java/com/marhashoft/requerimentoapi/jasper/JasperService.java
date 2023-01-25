@@ -124,14 +124,14 @@ public class JasperService {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
         parametros.put("assunto", requerimento.getAssunto());
-        parametros.put("numero", "<html><b>Req. Nº. "+requerimento.getNumero() + "</b></html>");
-        parametros.put("pessoa", "<html><b>" + requerimento.getPessoa().getNome() + "</b></html>");
+        parametros.put("numero", "Req. Nº. "+requerimento.getNumero());
+        parametros.put("vereador", requerimento.getPessoa().getNome().toUpperCase());
 
         String textoPadraoRequerimento = configuracaoService.findConfiguracao().getTextoPadraoRequerimento();
 
-        parametros.put("textoPadraoPessoa", "\t"+requerimento.getPessoa().getNome()
+        parametros.put("textoPadraoPessoa", requerimento.getPessoa().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
-        parametros.put("textoPadrao", "\t"+(!textoPadraoRequerimento.isEmpty() ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
+        parametros.put("textoPadrao", (!textoPadraoRequerimento.isEmpty() ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
         return parametros;
     }
 
@@ -140,15 +140,14 @@ public class JasperService {
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
         parametros.put("localAndData", "Mamanguape em, "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(DateUtil.transformeParaDate(oficio.getDataOficio()))+".");
         parametros.put("assunto", oficio.getAssunto());
-        parametros.put("texto", oficio.getTexto());
         parametros.put("numero", "Ofício "+oficio.getNumero());
-        parametros.put("assinante", oficio.getAssinante().getNome());
-        parametros.put("cargoPessoa", "Informar o cargo");
+        parametros.put("assinante", oficio.getAssinante().getNome().toUpperCase());
         parametros.put("destinatario", oficio.getDestinatario());
-        parametros.put("textoPadraoPessoa", "Venho através deste, mui respeitosamente encaminhar a esta Edilidade");
-
+        parametros.put("cargoDestinatario", oficio.getCargoDestinatario());
         String textoPadraoOficio = configuracaoService.findConfiguracao().getTextoPadraoOficio();
-        parametros.put("textoPadrao", "\t"+(!textoPadraoOficio.isEmpty() ? textoPadraoOficio : ""));
+        parametros.put("texto", (!textoPadraoOficio.isEmpty() ? textoPadraoOficio : "")+ " "+ oficio.getTexto());
+        parametros.put("formaTratamentoDestinatario", oficio.getFormaTratamentoDestinatario());
+        parametros.put("textoPadraoAjuda", "Qualquer eventual dúvida estamos à disposição. Certo do seu pronto atendimento, elevo votos de alta estima.");
         return parametros;
     }
 

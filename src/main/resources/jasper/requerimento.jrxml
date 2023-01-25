@@ -8,8 +8,8 @@
 	<parameter name="numero" class="java.lang.String">
 		<parameterDescription><![CDATA[numero]]></parameterDescription>
 	</parameter>
-	<parameter name="pessoa" class="java.lang.String">
-		<parameterDescription><![CDATA[pessoa]]></parameterDescription>
+	<parameter name="vereador" class="java.lang.String">
+		<parameterDescription><![CDATA[vereador]]></parameterDescription>
 	</parameter>
 	<parameter name="textoPadrao" class="java.lang.String">
 		<parameterDescription><![CDATA[textoPadrao]]></parameterDescription>
@@ -27,14 +27,14 @@
 	<pageHeader>
 		<band height="286" splitType="Stretch">
 			<staticText>
-				<reportElement x="111" y="185" width="348" height="16" uuid="19064803-a9f1-4b4d-b626-55fec91cd034"/>
+				<reportElement x="111" y="187" width="348" height="16" uuid="19064803-a9f1-4b4d-b626-55fec91cd034"/>
 				<textElement textAlignment="Center">
 					<font fontName="Calibri" size="12"/>
 				</textElement>
 				<text><![CDATA[Exmo. Sr. Presidente da Câmara Municipal de Mamanguape:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="49" y="229" width="100" height="22" uuid="31ac56e9-f179-4d85-b974-040c5e505c9a"/>
+				<reportElement x="49" y="230" width="100" height="22" uuid="31ac56e9-f179-4d85-b974-040c5e505c9a"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -58,7 +58,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="48" y="255" width="460" height="30" uuid="dff88445-e2a2-45e5-993c-31b8ba1410c0">
+				<reportElement x="48" y="256" width="460" height="30" uuid="dff88445-e2a2-45e5-993c-31b8ba1410c0">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
 				<textElement markup="none">
@@ -70,9 +70,10 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="103" splitType="Stretch">
+		<band height="70" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="51" y="16" width="460" height="84" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="51" y="7" width="460" height="54" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
@@ -82,9 +83,9 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 				<textFieldExpression><![CDATA[$P{assunto}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="64">
+		<band height="49">
 			<textField>
-				<reportElement x="54" y="5" width="430" height="59" uuid="af228808-1b2b-4823-8d7a-cc551294b985">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="51" y="3" width="429" height="39" uuid="af228808-1b2b-4823-8d7a-cc551294b985">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
 				<textElement>
@@ -96,13 +97,13 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="51" splitType="Stretch">
+		<band height="41" splitType="Stretch">
 			<textField>
 				<reportElement stretchType="ElementGroupHeight" x="120" y="0" width="343" height="22" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
 				<textElement textAlignment="Justified" markup="html">
 					<font fontName="SansSerif" size="14" isBold="true" isUnderline="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{pessoa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{vereador}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="232" y="22" width="100" height="16" uuid="02283a7f-acfd-43d4-9e96-1fd1aa84d1c7"/>
