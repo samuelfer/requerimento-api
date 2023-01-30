@@ -31,12 +31,12 @@ public class FileUploadController {
 
         arquivoService.salvar(novoNome, multipartFile);
 
-        String fileCode = FileUploadUtil.saveFile(novoNome, multipartFile);
+        FileUploadUtil.saveFile(novoNome, multipartFile);
 
         FileUploadResponse response = new FileUploadResponse();
         response.setFileName(novoNome);
         response.setSize(size);
-        response.setDownloadUrl("/downloadFile/" + novoNome);
+        response.setDownloadUrl("/arquivos-upload/" + novoNome);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

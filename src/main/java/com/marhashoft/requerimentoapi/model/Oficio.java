@@ -48,4 +48,6 @@ public class Oficio {
     private String destinatario;
 
     private String cargoDestinatario;
+
+    private String formaTratamentoDestinatario;
 }

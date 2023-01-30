@@ -19,7 +19,7 @@ public class ArquivoService {
 
         arquivoNovo.setNome(nomeArquivo);
         arquivoNovo.setSize(multipartFile.getSize());
-        arquivoNovo.setUrl(nomeArquivo);
+        arquivoNovo.setUrl("arquivos_upload/"+nomeArquivo);
         arquivoNovo.setAtivo(true);
         arquivoNovo.setExtension(ArquivoUtil.getExtensionArquivo(nomeArquivo));
         arquivoNovo.setTipoArquivo(TipoArquivoEnum.FOTO_VEREADOR.getNome());
