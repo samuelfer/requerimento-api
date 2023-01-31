@@ -42,7 +42,7 @@ public class Oficio {
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern="dd/MM/yyyy")
     private LocalDateTime dataOficio = LocalDateTime.now();
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
