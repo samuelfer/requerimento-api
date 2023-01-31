@@ -146,7 +146,7 @@ public class JasperService {
         parametros.put("cargoDestinatario", oficio.getCargoDestinatario());
         String textoPadraoOficio = configuracaoService.findConfiguracao().getTextoPadraoOficio();
         parametros.put("texto", (!textoPadraoOficio.isEmpty() ? textoPadraoOficio : "")+ " "+ oficio.getTexto());
-        parametros.put("formaTratamentoDestinatario", oficio.getFormaTratamentoDestinatario());
+        parametros.put("formaTratamentoDestinatario", oficio.getPronomeTratamento().getDescricao());
         parametros.put("textoPadraoAjuda", "Qualquer eventual dúvida estamos à disposição. Certo do seu pronto atendimento, elevo votos de alta estima.");
         return parametros;
     }
