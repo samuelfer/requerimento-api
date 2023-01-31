@@ -80,4 +80,8 @@ public class OficioService {
     public Optional<Oficio> findById(Long id) {
         return oficioRepository.findById(id);
     }
+
+    public Long countOficio() {
+        return oficioRepository.count();
+    }
 }

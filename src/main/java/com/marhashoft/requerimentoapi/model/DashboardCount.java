@@ -9,6 +9,7 @@ public class DashboardCount {
 
     private Long qtdVereador;
     private Long qtdRequerimento;
+    private Long qtdOficio;
     private Long qtdUsuario;
     private Long qtdServidor;
 }

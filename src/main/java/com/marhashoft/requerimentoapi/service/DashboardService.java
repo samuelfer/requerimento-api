@@ -15,12 +15,15 @@ public class DashboardService {
     private RequerimentoService requerimentoService;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private OficioService oficioService;
 
     public DashboardCount counts() {
         DashboardCount count = new DashboardCount();
 
         count.setQtdVereador(pessoaService.countByTipoPessoa(TipoPessoaEnum.TIPO_VEREADOR.getId()));
         count.setQtdRequerimento(requerimentoService.countRequerimento());
+        count.setQtdOficio(oficioService.countOficio());
         count.setQtdUsuario(usuarioService.countUsuario());
         count.setQtdServidor(pessoaService.countByTipoPessoa(TipoPessoaEnum.TIPO_SERVIDOR.getId()));
         return count;
