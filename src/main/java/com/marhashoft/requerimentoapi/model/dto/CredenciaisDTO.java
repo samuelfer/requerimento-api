@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class CredenciaisDTO {
 
-    private String email;
+    private String username;
     private String senha;
 }
