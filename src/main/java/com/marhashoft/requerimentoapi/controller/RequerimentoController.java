@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -33,13 +33,14 @@ public class RequerimentoController {
         return requerimentoService.listarTodos();
     }
 
+//    @PreAuthorize("hasAnyRole('USUARIO')")
     @GetMapping("/{id}")
     public ResponseEntity<Requerimento> listarPorId(@PathVariable("id") Long id) {
         Requerimento requerimento = requerimentoService.findByIdOuErro(id);
         return new ResponseEntity<>(requerimento, HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasAnyRole('USUARIO')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<Requerimento> cadastrar(@Valid @RequestBody Requerimento requerimento) {
         return new ResponseEntity<>(requerimentoService.cadastrar(requerimento), HttpStatus.CREATED);
