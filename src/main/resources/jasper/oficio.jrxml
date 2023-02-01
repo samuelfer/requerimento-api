@@ -91,7 +91,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 				<text><![CDATA[Assunto:]]></text>
 			</staticText>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="100" y="315" width="444" height="17" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="100" y="316" width="444" height="17" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
@@ -105,7 +105,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 	<detail>
 		<band height="142" splitType="Stretch">
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="47" y="24" width="464" height="56" uuid="53d12d5a-b35b-4667-95f1-cb4d12436fd4">
+				<reportElement positionType="Float" x="47" y="41" width="464" height="46" uuid="53d12d5a-b35b-4667-95f1-cb4d12436fd4">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<textElement markup="html">
@@ -115,7 +115,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 				<textFieldExpression><![CDATA[$P{texto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="48" y="92" width="460" height="28" uuid="dff88445-e2a2-45e5-993c-31b8ba1410c0">
+				<reportElement x="48" y="105" width="460" height="28" uuid="dff88445-e2a2-45e5-993c-31b8ba1410c0">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
 				<textElement markup="html">
@@ -125,7 +125,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 				<textFieldExpression><![CDATA[$P{textoPadraoAjuda}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="48" y="0" width="164" height="20" uuid="0730ec4e-8bbf-4119-ab84-8b2eb4974477">
+				<reportElement x="48" y="17" width="164" height="21" uuid="0730ec4e-8bbf-4119-ab84-8b2eb4974477">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<textElement>
