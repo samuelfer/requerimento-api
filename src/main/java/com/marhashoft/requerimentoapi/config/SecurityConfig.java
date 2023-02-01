@@ -37,6 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .and()
+                .authorizeRequests()
                 .anyRequest().authenticated();
 
         //Garante que nao serah criada sessao de usuario
