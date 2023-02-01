@@ -18,7 +18,7 @@ public class UsuarioDTO {
     protected String nome;
 
     @NotNull(message = "O campo email é obrigatório")
-    protected String email;
+    protected String username;
 
     @NotNull(message = "O campo senha é obrigatório")
     protected String senha;
@@ -39,7 +39,7 @@ public class UsuarioDTO {
         super();
         this.id = usuarioObj.getId();
         this.nome = usuarioObj.getNome();
-        this.email = usuarioObj.getEmail();
+        this.username = usuarioObj.getEmail();
         this.senha = usuarioObj.getSenha();
         this.perfis = usuarioObj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.ativo = true;
@@ -64,11 +64,11 @@ public class UsuarioDTO {
     }
 
     public String getEmail() {
-        return email;
+        return username;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.username = email;
     }
 
     public String getSenha() {

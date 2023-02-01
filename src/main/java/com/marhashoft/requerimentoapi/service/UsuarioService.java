@@ -1,14 +1,17 @@
 package com.marhashoft.requerimentoapi.service;
 
+import com.marhashoft.requerimentoapi.model.Role;
 import com.marhashoft.requerimentoapi.model.Usuario;
 import com.marhashoft.requerimentoapi.model.dto.IUsuarioResponse;
+import com.marhashoft.requerimentoapi.repository.RoleRepository;
 import com.marhashoft.requerimentoapi.repository.UsuarioRepository;
 import com.marhashoft.requerimentoapi.usuario.UsuarioLogado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +19,13 @@ import java.util.Optional;
 public class UsuarioService {
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
+
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Usuario findByIdOuErro(Long id) {
         return usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado com id " + id));
@@ -39,8 +46,13 @@ public class UsuarioService {
     public Usuario create(Usuario usuario) {
         usuario.setId(null);
         usuario.setAtivo(true);
-        usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
+        usuario.setUsername(usuario.getUsername());
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         validaPorEmail(usuario);
+
+        Role roles = roleRepository.findByNome("USER").get();
+        usuario.setRoles(Collections.singletonList(roles));
+
         return usuarioRepository.save(usuario);
     }
 
@@ -51,14 +63,14 @@ public class UsuarioService {
         validaPorEmail(usuario);
 
         if(usuario.getSenha() != null && !usuario.getSenha().equals(oldUsuario.getSenha())) {
-            oldUsuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
+            oldUsuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         }
 
         return usuarioRepository.save(oldUsuario);
     }
 
     private void validaPorEmail(Usuario usuarioParam) {
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(usuarioParam.getEmail());
+        Optional<Usuario> usuario = usuarioRepository.findByUsername(usuarioParam.getUsername());
 
         if (usuario.isPresent() && usuario.get().getId() != usuarioParam.getId()) {
             throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
@@ -80,7 +92,7 @@ public class UsuarioService {
         if (usuarioLogado == null ) {
             throw new RuntimeException("Usuário logado não encontrado.");
         }
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(usuarioLogado);
+        Optional<Usuario> usuario = usuarioRepository.findByUsername(usuarioLogado);
         if (!usuario.isPresent() ) {
             throw new RuntimeException("Usuário não encontrado.");
         }
@@ -90,5 +102,9 @@ public class UsuarioService {
 
     public String getUsuarioLogado() {
         return  UsuarioLogado.getUsuarioContexto().toString();
+    }
+
+    public boolean findByEmail(String email) {
+        return usuarioRepository.existsByUsername(email);
     }
 }
