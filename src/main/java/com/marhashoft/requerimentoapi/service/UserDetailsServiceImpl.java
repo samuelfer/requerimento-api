@@ -20,11 +20,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        Optional<Usuario> usuario = usuarioRepository.findByUsername(email);
 
         if (usuario.isPresent()) {
-            return new UsuarioSpringSecurity(usuario.get().getId(), usuario.get().getEmail(),
-                    usuario.get().getSenha(), usuario.get().getPerfis());
+            return new UsuarioSpringSecurity(usuario.get().getId(), usuario.get().getUsername(),
+                    usuario.get().getSenha(), usuario.get().getRoles());
         }
         throw new UsernameNotFoundException(email);
     }
