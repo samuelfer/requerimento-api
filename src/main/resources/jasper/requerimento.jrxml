@@ -61,7 +61,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 				<reportElement x="48" y="256" width="460" height="30" uuid="dff88445-e2a2-45e5-993c-31b8ba1410c0">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
-				<textElement markup="none">
+				<textElement textAlignment="Justified" markup="none">
 					<font fontName="Calibri" size="12"/>
 					<paragraph firstLineIndent="0"/>
 				</textElement>
@@ -70,10 +70,10 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="70" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="51" y="7" width="460" height="54" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="48" y="14" width="460" height="33" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
@@ -83,12 +83,12 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 				<textFieldExpression><![CDATA[$P{assunto}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="49">
+		<band height="47">
 			<textField>
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="51" y="3" width="429" height="39" uuid="af228808-1b2b-4823-8d7a-cc551294b985">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="48" y="8" width="460" height="32" uuid="af228808-1b2b-4823-8d7a-cc551294b985">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font fontName="Calibri" size="12"/>
 					<paragraph firstLineIndent="0"/>
 				</textElement>
@@ -97,16 +97,16 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="41" splitType="Stretch">
+		<band height="46" splitType="Stretch">
 			<textField>
-				<reportElement stretchType="ElementGroupHeight" x="120" y="0" width="343" height="22" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
+				<reportElement stretchType="ElementGroupHeight" x="160" y="2" width="343" height="22" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
 				<textElement textAlignment="Justified" markup="html">
 					<font fontName="SansSerif" size="14" isBold="true" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{vereador}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="232" y="22" width="100" height="16" uuid="02283a7f-acfd-43d4-9e96-1fd1aa84d1c7"/>
+				<reportElement x="233" y="24" width="100" height="16" uuid="02283a7f-acfd-43d4-9e96-1fd1aa84d1c7"/>
 				<textElement textAlignment="Center">
 					<font fontName="Calibri" size="12"/>
 				</textElement>

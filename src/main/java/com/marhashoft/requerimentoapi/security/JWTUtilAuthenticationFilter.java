@@ -32,7 +32,7 @@ public class JWTUtilAuthenticationFilter extends UsernamePasswordAuthenticationF
         try {
             CredenciaisDTO creds = new ObjectMapper().readValue(request.getInputStream(), CredenciaisDTO.class);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    creds.getEmail(), creds.getSenha(), new ArrayList<>());
+                    creds.getUsername(), creds.getSenha(), new ArrayList<>());
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
             return authentication;
         } catch (Exception e) {
@@ -43,6 +43,7 @@ public class JWTUtilAuthenticationFilter extends UsernamePasswordAuthenticationF
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         UsuarioSpringSecurity usuario = ((UsuarioSpringSecurity) authResult.getPrincipal());
+        System.out.println("Usuario "+usuario.getAuthorities());
         String token = jwtUtil.generateToken(usuario);
         response.setHeader("access-control-expose-headers", "Authorization");
         response.setHeader("Authorization", "Bearer "+token);

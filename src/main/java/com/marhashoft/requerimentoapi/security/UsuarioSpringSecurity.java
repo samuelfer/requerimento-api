@@ -1,12 +1,12 @@
 package com.marhashoft.requerimentoapi.security;
 
-import com.marhashoft.requerimentoapi.model.Perfil;
+import com.marhashoft.requerimentoapi.model.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class UsuarioSpringSecurity implements UserDetails {
@@ -16,12 +16,12 @@ public class UsuarioSpringSecurity implements UserDetails {
     private String senha;
     private Collection<?  extends GrantedAuthority> authorities;
 
-    public UsuarioSpringSecurity(Long id, String email, String senha, Set<Perfil> perfis) {
+    public UsuarioSpringSecurity(Long id, String email, String senha, List<Role> perfis) {
         super();
         this.id = id;
         this.email = email;
         this.senha = senha;
-        this.authorities = perfis.stream().map(p -> new SimpleGrantedAuthority(p.getDescricao())).collect(Collectors.toSet());
+        this.authorities = perfis.stream().map(p -> new SimpleGrantedAuthority(p.getNome())).collect(Collectors.toSet());
     }
 
     private Long getId() {

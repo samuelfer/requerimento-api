@@ -9,16 +9,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
-@Table(name = "usuario")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "usuario")
 public class Usuario {
     private static final long serialVersionUID = 1L;
 
@@ -30,9 +31,14 @@ public class Usuario {
     private String nome;
 
     @Column(unique = true)
-    private String email;
+    private String username;
 
     private String senha;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles = new ArrayList<>();
 
     //HashSet nao vai permitir valores repetidos na lista
     @ElementCollection(fetch = FetchType.EAGER)
