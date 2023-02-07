@@ -15,7 +15,8 @@ public class TipoPessoaService {
     public static final Long TIPO_USUARIO = 1L;
     public static final Long TIPO_VEREADOR = 2L;
     public static final Long TIPO_SERVIDOR = 3L;
-    public static final Long TIPO_ASSISTENTE = 4L;
+    public static final Long TIPO_ASSESSOR = 4L;
+    public static final Long TIPO_ASSISTENTE = 5L;
 
     @Autowired
     private TipoPessoaRepository tipoPessoaRepository;
