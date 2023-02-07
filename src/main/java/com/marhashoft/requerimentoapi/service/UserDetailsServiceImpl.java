@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional<Usuario> usuario = usuarioRepository.findByUsername(email);
 
         if (usuario.isPresent()) {
-            return new UsuarioSpringSecurity(usuario.get().getId(), usuario.get().getUsername(),
+            return new UsuarioSpringSecurity(usuario.get().getId(), usuario.get().getNome(), usuario.get().getUsername(),
                     usuario.get().getSenha(), usuario.get().getRoles());
         }
         throw new UsernameNotFoundException(email);
