@@ -23,20 +23,20 @@ public class TipoPessoaController {
       return tipoPessoaService.listarTodos();
     }
 
-    @PreAuthorize("hasAnyRole('USUARIO')")
+//    @PreAuthorize("hasAnyRole('USUARIO')")
     @PostMapping
     public ResponseEntity<TipoPessoa> cadastrar(@Valid @RequestBody TipoPessoa tipoPessoa) {
         return new ResponseEntity(tipoPessoaService.salvar(tipoPessoa), HttpStatus.CREATED);
     }
 
 
-    @PreAuthorize("hasAnyRole('USUARIO')")
+//    @PreAuthorize("hasAnyRole('USUARIO')")
     @PutMapping
     public ResponseEntity<TipoPessoa> atualizar(@Valid @RequestBody TipoPessoa tipoPessoa) {
         return new ResponseEntity(tipoPessoaService.salvar(tipoPessoa), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAnyRole('USUARIO')")
+//    @PreAuthorize("hasAnyRole('USUARIO')")
     @PutMapping("/inativar")
     public ResponseEntity<TipoPessoa> inativar(@Valid @RequestBody TipoPessoa tipoPessoa) {
         tipoPessoaService.inativar(tipoPessoa);
