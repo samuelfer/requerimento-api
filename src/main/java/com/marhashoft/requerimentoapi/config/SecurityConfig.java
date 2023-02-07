@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    private static final String[] PUBLIC_MATCHERS = {"/usuarios"};//Rotas que serao publicas
+    private static final String[] PUBLIC_MATCHERS = {"/usuarios/**"};//Rotas que serao publicas
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();//Informando que temos uma configuracao de cors
