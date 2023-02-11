@@ -20,10 +20,14 @@ public class VereadorDTO {
     @NotBlank(message = "O campo nome do vereador é obrigatório")
     private String nome;
 
+    private String email;
+
     private boolean ativo;
 
     private TipoPessoa tipoPessoa;
 
     private Cargo cargo;
+
+    private boolean usuarioSistema;
 
 }
