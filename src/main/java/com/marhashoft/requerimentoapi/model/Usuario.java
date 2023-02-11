@@ -58,4 +58,6 @@ public class Usuario {
     @JoinColumn(name = "tipo_pessoa_id", foreignKey = @ForeignKey(name = "usuario_tipo_pessoa"))
     private TipoPessoa tipoPessoa;
 
+    @Column(name = "pessoa_id")
+    private Long pessoaId;
 }
