@@ -20,10 +20,16 @@ public class AssessorDTO {
     @NotBlank(message = "O campo nome é obrigatório")
     private String nome;
 
+    private String email;
+
     @Valid
     private VereadorDTO vereador;
 
     private boolean ativo;
 
     private TipoPessoa tipoPessoa;
+
+    private boolean usuarioSistema;
+
+    private String senha;
 }
