@@ -37,8 +37,8 @@
 	<pageHeader>
 		<band height="333" splitType="Stretch">
 			<textField>
-				<reportElement x="49" y="182" width="100" height="22" uuid="31ac56e9-f179-4d85-b974-040c5e505c9a"/>
-				<textElement>
+				<reportElement x="49" y="182" width="111" height="22" uuid="31ac56e9-f179-4d85-b974-040c5e505c9a"/>
+				<textElement markup="none">
 					<font fontName="Calibri" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numero}]]></textFieldExpression>
@@ -89,18 +89,18 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 				<textFieldExpression><![CDATA[$P{cargoDestinatario}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="47" y="315" width="53" height="17" uuid="e6babd90-8eb5-4e07-80af-c70cc8a43680"/>
+				<reportElement x="47" y="310" width="53" height="22" uuid="e6babd90-8eb5-4e07-80af-c70cc8a43680"/>
 				<textElement>
-					<font fontName="Calibri" size="12"/>
+					<font fontName="Calibri" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Assunto:]]></text>
 			</staticText>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="100" y="316" width="444" height="17" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="101" y="310" width="434" height="23" forecolor="#000000" uuid="bff784d8-d44e-478c-b1bd-ee61e5b8e3df">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
-					<font fontName="Calibri" size="12"/>
+					<font fontName="Segoe UI Black" size="12" isBold="true"/>
 					<paragraph firstLineIndent="0"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{assunto}]]></textFieldExpression>
@@ -153,7 +153,7 @@ CÂMARA MUNICIPAL DE MAMANGUAPE
 	<columnFooter>
 		<band height="51" splitType="Stretch">
 			<textField>
-				<reportElement stretchType="ElementGroupHeight" x="168" y="3" width="310" height="18" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
+				<reportElement stretchType="ElementGroupHeight" x="154" y="3" width="310" height="18" uuid="304ecd66-8591-4556-953f-5a5dc8857ebb"/>
 				<textElement textAlignment="Left">
 					<font fontName="Calibri" size="12"/>
 				</textElement>

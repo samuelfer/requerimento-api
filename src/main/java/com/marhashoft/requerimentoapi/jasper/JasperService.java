@@ -136,11 +136,12 @@ public class JasperService {
     }
 
     private Map<String, Object> preencherParametros(Oficio oficio) {
+
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
         parametros.put("localAndData", "Mamanguape, "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(DateUtil.transformeParaDate(oficio.getDataOficio()))+".");
         parametros.put("assunto", oficio.getAssunto());
-        parametros.put("numero", "Ofício nº".toUpperCase()+oficio.getNumero());
+        parametros.put("numero", "OFÍCIO Nº "+oficio.getNumero());
         parametros.put("assinante", oficio.getAssinante().getNome().toUpperCase());
         parametros.put("destinatario", oficio.getDestinatario());
         parametros.put("cargoDestinatario", oficio.getCargoDestinatario());
