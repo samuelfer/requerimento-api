@@ -33,7 +33,7 @@ public class Requerimento {
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "pessoa_id", nullable=false)
-    private Pessoa pessoa;
+    private Pessoa vereador;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "usuario_id", nullable=false)
