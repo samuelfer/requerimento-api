@@ -6,9 +6,7 @@ import com.marhashoft.requerimentoapi.model.Requerimento;
 import com.marhashoft.requerimentoapi.model.Usuario;
 import com.marhashoft.requerimentoapi.repository.RequerimentoRepository;
 import com.marhashoft.requerimentoapi.shared.GeradorNumeroRequerimentoService;
-import com.marhashoft.requerimentoapi.usuario.UsuarioLogado;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +24,10 @@ public class RequerimentoService {
     private GeradorNumeroRequerimentoService geradorNumero;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private AssessorService assessorService;
+    @Autowired
+    private VereadorService vereadorService;
 
     public Requerimento findByIdOuErro(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Requerimento não encontrado com id " + id));
@@ -36,6 +38,9 @@ public class RequerimentoService {
     }
 
     public Requerimento cadastrar(Requerimento requerimento) {
+        Usuario usuarioLogado = usuarioService.getusuarioLogadoOuErro();
+
+        validaUsuarioLogadoPodeCadastrarRequerimento(usuarioLogado, requerimento.getVereador().getId());
         numeroDeRequerimentoJaCadastrado(requerimento);
         requerimento.setUsuario(usuarioService.getusuarioLogadoOuErro());
         return repository.save(requerimento);
@@ -74,5 +79,15 @@ public class RequerimentoService {
 
     public Long countRequerimento() {
         return repository.count();
+    }
+
+
+    public void validaUsuarioLogadoPodeCadastrarRequerimento(Usuario usuarioLogado, Long vereadorId) {
+
+        if (usuarioService.usuarioLogadoIsAssessor()) {
+            assessorService.validaAssessorPodePreencherRequerimentoDoVereador(usuarioLogado, vereadorId);
+        } else if(usuarioService.usuarioLogadoIsVereador()) {
+            vereadorService.validaVereadorPodePreencherRequerimento(usuarioLogado, vereadorId);
+        }
     }
 }
