@@ -21,7 +21,7 @@ public class AssessorService {
     @Autowired
     ModelMapper modelMapper;
     @Autowired
-    private UsuarioService usuarioService;
+    UsuarioService usuarioService;
 
     public Assessor findByIdOuErro(Long id) {
         return assessorRepository.findById(id).orElseThrow(() -> new RuntimeException("Assessor não encontrado com id " + id));
@@ -66,5 +66,12 @@ public class AssessorService {
         novoUsuario.setTipoPessoa(assessor.getTipoPessoa());
         novoUsuario.setSenha(senha);
         return novoUsuario;
+    }
+
+    public void validaAssessorPodePreencherRequerimentoDoVereador(Usuario usuario, Long vereadorId) {
+        Assessor assessor = findByIdOuErro(usuario.getPessoaId());
+        if (!assessor.getVereador().getId().equals(vereadorId)) {
+            throw new RuntimeException("O usuário não tem permissão para cadastrar requerimento para esse vereador");
+        }
     }
 }
