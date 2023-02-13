@@ -84,4 +84,11 @@ public class VereadorService {
         vereador.add(vereadorResult.get());
         return vereador;
     }
+
+    public void validaVereadorPodePreencherRequerimento(Usuario usuario, Long vereadorId) {
+        Vereador vereador = findByIdOuErro(usuario.getPessoaId());
+        if (!vereador.getId().equals(vereadorId)) {
+            throw new RuntimeException("O usuário não tem permissão para cadastrar requerimento para esse vereador");
+        }
+    }
 }
