@@ -104,4 +104,12 @@ public class UsuarioService {
     public String getUsuarioLogado() {
         return  UsuarioLogado.getUsuarioContexto().toString();
     }
+
+    public boolean usuarioLogadoIsAssessor() {
+        return getusuarioLogadoOuErro().getTipoPessoa().getId().equals(TipoPessoaService.TIPO_ASSESSOR);
+    }
+
+    public boolean usuarioLogadoIsVereador() {
+        return getusuarioLogadoOuErro().getTipoPessoa().getId().equals(TipoPessoaService.TIPO_VEREADOR);
+    }
 }
