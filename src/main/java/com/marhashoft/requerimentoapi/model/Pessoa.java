@@ -31,7 +31,7 @@ public class Pessoa {
     private boolean ativo;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vereador", fetch = FetchType.LAZY)
     private List<Requerimento> requerimentos;
 
     private boolean usuarioSistema;

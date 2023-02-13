@@ -125,11 +125,11 @@ public class JasperService {
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
         parametros.put("assunto", requerimento.getAssunto());
         parametros.put("numero", "Req. Nº. "+requerimento.getNumero());
-        parametros.put("vereador", requerimento.getPessoa().getNome().toUpperCase());
+        parametros.put("vereador", requerimento.getVereador().getNome().toUpperCase());
 
         String textoPadraoRequerimento = configuracaoService.findConfiguracao().getTextoPadraoRequerimento();
 
-        parametros.put("textoPadraoPessoa", requerimento.getPessoa().getNome()
+        parametros.put("textoPadraoPessoa", requerimento.getVereador().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
         parametros.put("textoPadrao", (!textoPadraoRequerimento.isEmpty() ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
         return parametros;
