@@ -40,7 +40,7 @@ public class RequerimentoController {
         return new ResponseEntity<>(requerimento, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping
     public ResponseEntity<Requerimento> cadastrar(@Valid @RequestBody Requerimento requerimento) {
         return new ResponseEntity<>(requerimentoService.cadastrar(requerimento), HttpStatus.CREATED);

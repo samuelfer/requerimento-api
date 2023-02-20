@@ -1,0 +1,14 @@
+--INSERT INTO public.usuario (id,ativo,data_criacao,username,nome,senha,tipo_pessoa_id) VALUES
+--	 (1,true,'2022-12-28','saulo@gmail.com','Saulo Fernandes','$2a$10$Xia2GTzH9E8Mzl1XRZmoUOzhfZjge0.7m3D/q/JYQVKlBQYEOujsK',NULL);
+--
+--INSERT INTO public."role" (id,nome) VALUES
+--	 (2,'USER'),
+--	 (1,'ADMIN'),
+--	 (3,'ASSESSOR'),
+--	 (4,'VEREADOR'),
+--	 (5,'SERVIDOR'),
+----	 (6,'MASTER');
+--
+--INSERT INTO public.usuario_roles (usuario_id,role_id) VALUES
+--	 (1,1),
+--	 (1,2);

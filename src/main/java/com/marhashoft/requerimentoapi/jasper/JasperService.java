@@ -125,27 +125,27 @@ public class JasperService {
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
         parametros.put("assunto", requerimento.getAssunto());
         parametros.put("numero", "Req. Nº. "+requerimento.getNumero());
-        parametros.put("vereador", requerimento.getPessoa().getNome().toUpperCase());
+        parametros.put("vereador", requerimento.getVereador().getNome().toUpperCase());
 
         String textoPadraoRequerimento = configuracaoService.findConfiguracao().getTextoPadraoRequerimento();
 
-        parametros.put("textoPadraoPessoa", requerimento.getPessoa().getNome()
+        parametros.put("textoPadraoPessoa", requerimento.getVereador().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
         parametros.put("textoPadrao", (!textoPadraoRequerimento.isEmpty() ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
         return parametros;
     }
 
     private Map<String, Object> preencherParametros(Oficio oficio) {
+
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("logo", getResourcePath(this.jasperPropriedades.getLogo()));
-        parametros.put("localAndData", "Mamanguape em, "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(DateUtil.transformeParaDate(oficio.getDataOficio()))+".");
+        parametros.put("localAndData", "Mamanguape, "+new java.text.SimpleDateFormat("dd MMMM yyyy").format(DateUtil.transformeParaDate(oficio.getDataOficio()))+".");
         parametros.put("assunto", oficio.getAssunto());
-        parametros.put("numero", "Ofício "+oficio.getNumero());
+        parametros.put("numero", "OFÍCIO Nº "+oficio.getNumero());
         parametros.put("assinante", oficio.getAssinante().getNome().toUpperCase());
         parametros.put("destinatario", oficio.getDestinatario());
         parametros.put("cargoDestinatario", oficio.getCargoDestinatario());
-        String textoPadraoOficio = configuracaoService.findConfiguracao().getTextoPadraoOficio();
-        parametros.put("texto", (!textoPadraoOficio.isEmpty() ? textoPadraoOficio : "")+ " "+ oficio.getTexto());
+        parametros.put("texto", oficio.getTexto());
         parametros.put("formaTratamentoDestinatario", oficio.getPronomeTratamento().getDescricao());
         parametros.put("textoPadraoAjuda", "Qualquer eventual dúvida estamos à disposição. Certo do seu pronto atendimento, elevo votos de alta estima.");
         return parametros;

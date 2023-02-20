@@ -37,7 +37,7 @@ public class Usuario {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles = new ArrayList<>();
 
     //HashSet nao vai permitir valores repetidos na lista
@@ -54,4 +54,10 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Requerimento> requerimentos;
 
+    @ManyToOne
+    @JoinColumn(name = "tipo_pessoa_id", foreignKey = @ForeignKey(name = "usuario_tipo_pessoa"))
+    private TipoPessoa tipoPessoa;
+
+    @Column(name = "pessoa_id")
+    private Long pessoaId;
 }

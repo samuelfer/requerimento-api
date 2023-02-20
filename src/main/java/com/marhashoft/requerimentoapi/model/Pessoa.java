@@ -26,11 +26,15 @@ public class Pessoa {
     @NotBlank(message = "O campo nome é obrigatório")
     private String nome;
 
+    private String email;
+
     private boolean ativo;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vereador", fetch = FetchType.LAZY)
     private List<Requerimento> requerimentos;
+
+    private boolean usuarioSistema;
 
     @ManyToOne
     @JoinColumn(name = "tipo_pessoa_id", foreignKey = @ForeignKey(name = "pessoa_tipo_pessoa"))

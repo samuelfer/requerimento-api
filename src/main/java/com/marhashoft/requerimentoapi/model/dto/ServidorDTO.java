@@ -23,10 +23,16 @@ public class ServidorDTO {
     @NotBlank(message = "O campo nome é obrigatório")
     private String nome;
 
+    private String email;
+
     @Valid
     private Cargo cargo;
 
     private boolean ativo;
 
     private TipoPessoa tipoPessoa;
+
+    private boolean usuarioSistema = false;
+
+    private String senha;
 }

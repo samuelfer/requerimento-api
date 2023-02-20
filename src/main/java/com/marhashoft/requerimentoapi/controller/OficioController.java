@@ -1,8 +1,10 @@
 package com.marhashoft.requerimentoapi.controller;
 
 import com.marhashoft.requerimentoapi.jasper.JasperService;
+import com.marhashoft.requerimentoapi.model.Configuracao;
 import com.marhashoft.requerimentoapi.model.Oficio;
 import com.marhashoft.requerimentoapi.model.Pessoa;
+import com.marhashoft.requerimentoapi.service.ConfiguracaoService;
 import com.marhashoft.requerimentoapi.service.OficioService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +31,24 @@ public class OficioController {
     private OficioService oficioService;
     @Autowired
     private JasperService jasperService;
+    @Autowired
+    private ConfiguracaoService configuracaoService;
 
     @GetMapping
     public List<Oficio> listarTodos() {
         return oficioService.listarTodos();
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Oficio> listarPorId(@PathVariable("id") Long id) {
         Oficio oficio = oficioService.findByIdOuErro(id);
         return new ResponseEntity<>(oficio, HttpStatus.OK);
+    }
+
+    @GetMapping("/texto-padrao")
+    public ResponseEntity<Configuracao> getTextoPadraoOficio() {
+        return new ResponseEntity(configuracaoService.findConfiguracao(), HttpStatus.OK);
     }
 
     @GetMapping("/assinantes")

@@ -2,6 +2,7 @@ package com.marhashoft.requerimentoapi.service;
 
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
 import com.marhashoft.requerimentoapi.model.Servidor;
+import com.marhashoft.requerimentoapi.model.Usuario;
 import com.marhashoft.requerimentoapi.model.dto.ServidorDTO;
 import com.marhashoft.requerimentoapi.repository.ServidorRepository;
 import org.modelmapper.ModelMapper;
@@ -19,6 +20,8 @@ public class ServidorService {
     private ServidorRepository servidorRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private UsuarioService usuarioService;
 
     public Servidor findByIdOuErro(Long id) {
         return servidorRepository.findById(id).orElseThrow(() -> new RuntimeException("Servidor não encontrado com id " + id));
@@ -32,7 +35,12 @@ public class ServidorService {
         servidorJaCadastrado(servidorDTO);
         servidorDTO.setAtivo(true);
         Servidor servidor = modelMapper.map(servidorDTO, Servidor.class);
-        return servidorRepository.save(servidor);
+        Servidor servidorSalvo = servidorRepository.save(servidor);
+
+        if (servidorDTO.isUsuarioSistema()) {
+            usuarioService.create(mapearServidorToUsuario(servidorSalvo, servidorDTO.getSenha()));
+        }
+        return servidorSalvo;
     }
 
     public Servidor atualizar(ServidorDTO servidorDTO) {
@@ -48,5 +56,15 @@ public class ServidorService {
             throw new DataIntegrationViolationApiException("O servidor  "
                     + servidorDTO.getNome() + " já foi cadastrado no sistema!");
         }
+    }
+
+    private Usuario mapearServidorToUsuario(Servidor servidor, String senha) {
+        Usuario novoUsuario = new Usuario();
+        novoUsuario.setPessoaId(servidor.getId());
+        novoUsuario.setNome(servidor.getNome());
+        novoUsuario.setUsername(servidor.getEmail());
+        novoUsuario.setTipoPessoa(servidor.getTipoPessoa());
+        novoUsuario.setSenha(senha);
+        return novoUsuario;
     }
 }

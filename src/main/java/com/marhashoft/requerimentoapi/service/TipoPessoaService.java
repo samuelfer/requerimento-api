@@ -1,10 +1,8 @@
 package com.marhashoft.requerimentoapi.service;
 
-import com.marhashoft.requerimentoapi.model.Requerimento;
 import com.marhashoft.requerimentoapi.model.TipoPessoa;
 import com.marhashoft.requerimentoapi.repository.TipoPessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +13,8 @@ public class TipoPessoaService {
     public static final Long TIPO_USUARIO = 1L;
     public static final Long TIPO_VEREADOR = 2L;
     public static final Long TIPO_SERVIDOR = 3L;
-    public static final Long TIPO_ASSISTENTE = 4L;
+    public static final Long TIPO_ASSESSOR = 4L;
+    public static final Long TIPO_ADMIN = 5L;
 
     @Autowired
     private TipoPessoaRepository tipoPessoaRepository;

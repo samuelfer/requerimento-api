@@ -43,7 +43,6 @@ public class JWTUtilAuthenticationFilter extends UsernamePasswordAuthenticationF
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         UsuarioSpringSecurity usuario = ((UsuarioSpringSecurity) authResult.getPrincipal());
-        System.out.println("Usuario "+usuario.getAuthorities());
         String token = jwtUtil.generateToken(usuario);
         response.setHeader("access-control-expose-headers", "Authorization");
         response.setHeader("Authorization", "Bearer "+token);

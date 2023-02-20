@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -72,7 +73,7 @@ public class UsuarioService {
     private void validaPorEmail(Usuario usuarioParam) {
         Optional<Usuario> usuario = usuarioRepository.findByUsername(usuarioParam.getUsername());
 
-        if (usuario.isPresent() && usuario.get().getId() != usuarioParam.getId()) {
+        if (usuario.isPresent() && !Objects.equals(usuario.get().getId(), usuarioParam.getId())) {
             throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
         }
     }
@@ -104,7 +105,11 @@ public class UsuarioService {
         return  UsuarioLogado.getUsuarioContexto().toString();
     }
 
-    public boolean findByEmail(String email) {
-        return usuarioRepository.existsByUsername(email);
+    public boolean usuarioLogadoIsAssessor() {
+        return getusuarioLogadoOuErro().getTipoPessoa().getId().equals(TipoPessoaService.TIPO_ASSESSOR);
+    }
+
+    public boolean usuarioLogadoIsVereador() {
+        return getusuarioLogadoOuErro().getTipoPessoa().getId().equals(TipoPessoaService.TIPO_VEREADOR);
     }
 }

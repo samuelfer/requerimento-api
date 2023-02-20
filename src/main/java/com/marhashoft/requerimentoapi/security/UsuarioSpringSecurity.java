@@ -12,20 +12,26 @@ import java.util.stream.Collectors;
 public class UsuarioSpringSecurity implements UserDetails {
 
     private Long id;
-    private String email;
+    private String nome;
+    private String username;
     private String senha;
     private Collection<?  extends GrantedAuthority> authorities;
 
-    public UsuarioSpringSecurity(Long id, String email, String senha, List<Role> perfis) {
+    public UsuarioSpringSecurity(Long id, String nome, String username, String senha, List<Role> perfis) {
         super();
         this.id = id;
-        this.email = email;
+        this.nome = nome;
+        this.username = username;
         this.senha = senha;
         this.authorities = perfis.stream().map(p -> new SimpleGrantedAuthority(p.getNome())).collect(Collectors.toSet());
     }
 
-    private Long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     @Override
@@ -40,7 +46,7 @@ public class UsuarioSpringSecurity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
