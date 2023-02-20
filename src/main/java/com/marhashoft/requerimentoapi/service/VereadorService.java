@@ -42,7 +42,9 @@ public class VereadorService {
         Usuario usuario = usuarioService.getusuarioLogadoOuErro();
 
         if (usuario.getTipoPessoa().getId().equals(TipoPessoaEnum.TIPO_ASSESSOR.getId())) {
-            return listarVereadorPorAssessor(usuario.getPessoaId());
+            List<Vereador> vereador = new ArrayList<>();
+            vereador.add(assessorService.getVereadorDoAssessor(usuario));
+            return vereador;
         }
         return vereadorRepository.findAll(Sort.by(Sort.Direction.DESC, "nome"));
     }
@@ -72,17 +74,6 @@ public class VereadorService {
             throw new DataIntegrationViolationApiException("O vereador  "
                     + vereadorDTO.getNome() + " já foi cadastrado no sistema!");
         }
-    }
-
-    private List<Vereador> listarVereadorPorAssessor(Long assessorId) {
-        Assessor assessor = assessorService.findByIdOuErro(assessorId);
-        List<Vereador> vereador = new ArrayList<>();
-        Optional<Vereador> vereadorResult = vereadorRepository.findById(assessor.getVereador().getId());
-        if (!vereadorResult.isPresent()) {
-            throw new RuntimeException("Erro ao tentar listar o vereador");
-        }
-        vereador.add(vereadorResult.get());
-        return vereador;
     }
 
     public void validaVereadorPodePreencherRequerimento(Usuario usuario, Long vereadorId) {

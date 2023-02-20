@@ -3,6 +3,7 @@ package com.marhashoft.requerimentoapi.service;
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
 import com.marhashoft.requerimentoapi.model.Assessor;
 import com.marhashoft.requerimentoapi.model.Usuario;
+import com.marhashoft.requerimentoapi.model.Vereador;
 import com.marhashoft.requerimentoapi.model.dto.AssessorDTO;
 import com.marhashoft.requerimentoapi.repository.AssessorRepository;
 import org.modelmapper.ModelMapper;
@@ -73,5 +74,14 @@ public class AssessorService {
         if (!assessor.getVereador().getId().equals(vereadorId)) {
             throw new RuntimeException("O usuário não tem permissão para cadastrar requerimento para esse vereador");
         }
+    }
+
+    public Vereador getVereadorDoAssessor(Usuario usuario) {
+        Vereador vereador = findByIdOuErro(usuario.getPessoaId()).getVereador();
+
+        if (vereador == null) {
+            throw new RuntimeException("O assessor não está associado a nenhum vereador");
+        }
+        return vereador;
     }
 }
