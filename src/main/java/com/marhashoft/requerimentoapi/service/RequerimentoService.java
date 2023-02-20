@@ -34,13 +34,19 @@ public class RequerimentoService {
     }
 
     public List<Requerimento> listarTodos() {
+        Usuario usuarioLogado = usuarioService.getusuarioLogadoOuErro();
+        if (usuarioService.usuarioLogadoIsAssessor()) {
+            return repository.findByVereadorId(assessorService.getVereadorDoAssessor(usuarioLogado).getId());
+        } else if(usuarioService.usuarioLogadoIsVereador()) {
+            return repository.findByVereadorId(usuarioLogado.getPessoaId());
+        }
         return repository.findAll();
     }
 
     public Requerimento cadastrar(Requerimento requerimento) {
         Usuario usuarioLogado = usuarioService.getusuarioLogadoOuErro();
 
-        validaUsuarioLogadoPodeCadastrarRequerimento(usuarioLogado, requerimento.getVereador().getId());
+        validaUsuarioLogadoPodeOperarNoRequerimento(usuarioLogado, requerimento.getVereador().getId());
         numeroDeRequerimentoJaCadastrado(requerimento);
         requerimento.setUsuario(usuarioService.getusuarioLogadoOuErro());
         return repository.save(requerimento);
@@ -50,6 +56,8 @@ public class RequerimentoService {
         if (requerimento.getId() == null) {
             throw new RuntimeException("Requerimento não encontrado.");
         }
+        Usuario usuarioLogado = usuarioService.getusuarioLogadoOuErro();
+        validaUsuarioLogadoPodeOperarNoRequerimento(usuarioLogado, requerimento.getVereador().getId());
         findByIdOuErro(requerimento.getId());
         numeroDeRequerimentoJaCadastrado(requerimento);
         return repository.save(requerimento);
@@ -78,11 +86,17 @@ public class RequerimentoService {
     }
 
     public Long countRequerimento() {
+        Usuario usuarioLogado = usuarioService.getusuarioLogadoOuErro();
+        if (usuarioService.usuarioLogadoIsAssessor()) {
+            return repository.countByVereadorId(assessorService.getVereadorDoAssessor(usuarioLogado).getId());
+        } else if(usuarioService.usuarioLogadoIsVereador()) {
+            return repository.countByVereadorId(usuarioLogado.getPessoaId());
+        }
         return repository.count();
     }
 
 
-    public void validaUsuarioLogadoPodeCadastrarRequerimento(Usuario usuarioLogado, Long vereadorId) {
+    public void validaUsuarioLogadoPodeOperarNoRequerimento(Usuario usuarioLogado, Long vereadorId) {
 
         if (usuarioService.usuarioLogadoIsAssessor()) {
             assessorService.validaAssessorPodePreencherRequerimentoDoVereador(usuarioLogado, vereadorId);
