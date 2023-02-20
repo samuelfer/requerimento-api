@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -20,6 +22,7 @@ public class JWTUtil {
 
     public String generateToken(UsuarioSpringSecurity usuario) {
         return Jwts.builder()
+                .addClaims(detalhesUsuario(usuario))
                 .setSubject(usuario.getUsername())
                 .claim("authorities", usuario.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
@@ -56,5 +59,13 @@ public class JWTUtil {
             return claims.getSubject();
         }
         return null;
+    }
+
+    private Map<String, Object> detalhesUsuario(UsuarioSpringSecurity usuario) {
+        Map<String, Object> detalhe = new HashMap<>();
+
+        detalhe.put("id", usuario.getId());
+        detalhe.put("nome", usuario.getNome());
+        return detalhe;
     }
 }
