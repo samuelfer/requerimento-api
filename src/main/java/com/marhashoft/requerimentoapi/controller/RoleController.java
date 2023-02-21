@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/perfis")
+@RequestMapping("/admin/perfis")
 public class RoleController {
 
     @Autowired
@@ -21,28 +21,30 @@ public class RoleController {
     @Autowired
     private JasperService jasperService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public List<Role> listarTodos() {
         return roleService.listarTodos();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Role> listarPorId(@PathVariable("id") Long id) {
         Role role = roleService.findByIdOuErro(id);
         return new ResponseEntity<>(role, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<Role> cadastrar(@Valid @RequestBody Role role) {
         return new ResponseEntity<>(roleService.salvar(role), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping
     public ResponseEntity<Role> atualizar(@Valid @RequestBody Role role) {
         return new ResponseEntity<>(roleService.salvar(role), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletar(@PathVariable("id") Long id) {
+        roleService.deletar(id);
+        return new ResponseEntity(null, HttpStatus.OK);
     }
 }

@@ -36,4 +36,13 @@ public class RoleService {
                     + role.getNome() + " já foi cadastrado no sistema!");
         }
     }
+
+    public void deletar(Long id) {
+        Role role = findByIdOuErro(id);
+        Optional<Role> roleWithUserByRoleId = roleRepository.findRoleWithUserByRoleId(id);
+        if (roleWithUserByRoleId.isPresent()) {
+            throw new RuntimeException("Esse perfil não pode ser excluído pois ele está associado a usuário");
+        }
+        roleRepository.delete(role);
+    }
 }
