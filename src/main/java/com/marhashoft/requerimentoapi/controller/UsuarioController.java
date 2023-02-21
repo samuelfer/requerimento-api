@@ -1,11 +1,13 @@
 package com.marhashoft.requerimentoapi.controller;
 
 import com.marhashoft.requerimentoapi.model.Usuario;
+import com.marhashoft.requerimentoapi.model.UsuarioPerfil;
 import com.marhashoft.requerimentoapi.model.dto.IUsuarioResponse;
 import com.marhashoft.requerimentoapi.service.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -55,5 +57,11 @@ public class UsuarioController {
     public ResponseEntity<Usuario> inativar(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
         usuarioService.inativar(id, usuario);
         return ResponseEntity.ok().body(null);
+    }
+
+    @ApiOperation(value = "Associar perfil ao usuario")
+    @PostMapping("/associar-perfil")
+    public ResponseEntity<?> associarPerfil(@RequestBody UsuarioPerfil usuarioPerfil) {
+        return new ResponseEntity(usuarioService.associarPerfil(usuarioPerfil), HttpStatus.CREATED);
     }
 }

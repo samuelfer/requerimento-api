@@ -2,6 +2,7 @@ package com.marhashoft.requerimentoapi.service;
 
 import com.marhashoft.requerimentoapi.model.Role;
 import com.marhashoft.requerimentoapi.model.Usuario;
+import com.marhashoft.requerimentoapi.model.UsuarioPerfil;
 import com.marhashoft.requerimentoapi.model.dto.IUsuarioResponse;
 import com.marhashoft.requerimentoapi.repository.RoleRepository;
 import com.marhashoft.requerimentoapi.repository.UsuarioRepository;
@@ -11,10 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UsuarioService {
@@ -111,5 +109,23 @@ public class UsuarioService {
 
     public boolean usuarioLogadoIsVereador() {
         return getusuarioLogadoOuErro().getTipoPessoa().getId().equals(TipoPessoaService.TIPO_VEREADOR);
+    }
+
+    public Usuario associarPerfil(UsuarioPerfil usuarioPerfil) {
+        Usuario usuario = findByIdOuErro(usuarioPerfil.getUsuario().getId());
+
+        if (!usuarioPerfil.getRolesId().isEmpty()) {
+            List<Role> roles = new ArrayList<>();
+            usuarioPerfil.getRolesId().forEach(roleId -> {
+                Optional<Role> role = roleRepository.findById(roleId);
+
+                if (role.isPresent()) {
+                    roles.add(role.get());
+                }
+            });
+            usuario.setRoles(roles);
+        }
+
+        return usuarioRepository.save(usuario);
     }
 }
