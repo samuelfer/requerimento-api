@@ -45,6 +45,6 @@ public class RoleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable("id") Long id) {
         roleService.deletar(id);
-        return new ResponseEntity(null, HttpStatus.OK);
+        return new ResponseEntity("Registro excluído com sucesso", HttpStatus.NO_CONTENT);
     }
 }
