@@ -1,5 +1,6 @@
 package com.marhashoft.requerimentoapi.jasper;
 
+import com.marhashoft.requerimentoapi.model.Configuracao;
 import com.marhashoft.requerimentoapi.model.Oficio;
 import com.marhashoft.requerimentoapi.model.Requerimento;
 import com.marhashoft.requerimentoapi.service.ConfiguracaoService;
@@ -22,10 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
 
@@ -127,7 +125,12 @@ public class JasperService {
         parametros.put("numero", "Req. Nº. "+requerimento.getNumero());
         parametros.put("vereador", requerimento.getVereador().getNome().toUpperCase());
 
-        String textoPadraoRequerimento = configuracaoService.findConfiguracao().getTextoPadraoRequerimento();
+        Configuracao configuracao = configuracaoService.findConfiguracao();
+
+        String textoPadraoRequerimento = null;
+        if (configuracao != null) {
+            textoPadraoRequerimento = configuracao.getTextoPadraoRequerimento();
+        }
 
         parametros.put("textoPadraoPessoa", requerimento.getVereador().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
