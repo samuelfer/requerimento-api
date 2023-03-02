@@ -39,6 +39,9 @@ public class AssessorService {
         Assessor assessorSalvo = assessorRepository.save(assessor);
 
         if (assessorDTO.isUsuarioSistema()) {
+            if (assessorDTO.getSenha().isEmpty()) {
+                throw new RuntimeException("Por favor informe uma senha.");
+            }
             usuarioService.create(mapearAssessorToUsuario(assessorSalvo, assessorDTO.getSenha()));
         }
         return assessorSalvo;
