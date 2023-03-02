@@ -38,6 +38,9 @@ public class ServidorService {
         Servidor servidorSalvo = servidorRepository.save(servidor);
 
         if (servidorDTO.isUsuarioSistema()) {
+            if (servidorDTO.getSenha().isEmpty()) {
+                throw new RuntimeException("Por favor informe uma senha.");
+            }
             usuarioService.create(mapearServidorToUsuario(servidorSalvo, servidorDTO.getSenha()));
         }
         return servidorSalvo;
