@@ -49,7 +49,7 @@ public class UsuarioService {
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         validaPorEmail(usuario);
 
-        Role roles = roleRepository.findByNome("USER").get();
+        Role roles = roleRepository.findByNome("ROLE_USER").get();
         usuario.setRoles(Collections.singletonList(roles));
 
         return usuarioRepository.save(usuario);
