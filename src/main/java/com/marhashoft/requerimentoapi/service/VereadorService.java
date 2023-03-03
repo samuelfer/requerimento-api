@@ -54,7 +54,7 @@ public class VereadorService {
         vereadorDTO.setAtivo(true);
         if (vereadorDTO.getCargo().getDescricao() == null) {
             Cargo cargo = cargoService.findByIdOuErro(CargoEnum.VEREADOR.getId());
-            vereadorDTO.setTipoPessoa(tipoPessoaService.findByIdOuErro(TipoPessoaService.TIPO_VEREADOR.getId()));
+            vereadorDTO.setTipoPessoa(tipoPessoaService.findByIdOuErro(TipoPessoaService.TIPO_VEREADOR));
             vereadorDTO.setCargo(cargo);
         }
         Vereador vereador = modelMapper.map(vereadorDTO, Vereador.class);

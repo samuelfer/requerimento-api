@@ -36,6 +36,8 @@ public class JasperService {
     private JasperPropriedades jasperPropriedades;
     @Autowired
     private ConfiguracaoService configuracaoService;
+    @Autowired
+    private JasperPropriedades properties;
 
 
     public void gerarPdf(Requerimento requerimento, HttpServletResponse response,
@@ -59,7 +61,7 @@ public class JasperService {
     public void gerarPdf(Oficio oficio, HttpServletResponse response,
                                String caminhoArquivo, String nomeArquivo) {
         try {
-            Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + "/jasper/"+caminhoArquivo);
+            Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + caminhoArquivo);
 
             JasperReport report = (JasperReport) JRLoader.loadObject(resource.getInputStream());
 
@@ -165,6 +167,7 @@ public class JasperService {
         }
     }
 
+
     private String getResourcePath(String property) {
         try {
             return new ClassPathResource(property).getURL().toString();
@@ -177,14 +180,14 @@ public class JasperService {
         Map<String, Object> parametros =
                 preencherParametros(arquivo);
 
-        return gerarPDFByteArray(parametros, "oficio.jrxml");
+        return gerarPDFByteArray(parametros, properties.getOficio());
     }
 
     public byte[] gerarPDF(Requerimento requerimento) throws Exception {
         Map<String, Object> parametros =
                 preencherParametros(requerimento);
 
-        return gerarPDFByteArray(parametros, "requerimento.jrxml");
+        return gerarPDFByteArray(parametros, properties.getOficio());
     }
 
     private byte[] gerarPDFByteArray(Map<String, Object> parameters, String caminhoJasper)
@@ -198,12 +201,8 @@ public class JasperService {
 
     private JasperReport carregarJasper(String caminho) throws JRException {
         final JasperDesign jasperDesignMaster =
-                JRXmlLoader.load(JasperService.class.getResourceAsStream("/jasper/"+caminho));
+                JRXmlLoader.load(JasperService.class.getResourceAsStream(caminho));
 
         return JasperCompileManager.compileReport(jasperDesignMaster);
-    }
-
-    private void preencherParametrosPadraoPdf(Map<String, Object> parametros) {
-//        parametros.put("logo", getResourcePath(this.properties.getLogotipo()));
     }
 }

@@ -10,4 +10,6 @@ import org.springframework.context.annotation.Configuration;
 public class JasperPropriedades {
 
     private String logo;
+    private String oficio;
+    private String requerimento;
 }
