@@ -137,7 +137,7 @@ public class JasperService {
 
         parametros.put("textoPadraoPessoa", requerimento.getVereador().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
-        parametros.put("textoPadrao", (!textoPadraoRequerimento.isEmpty() && textoPadraoRequerimento != null ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
+        parametros.put("textoPadrao", (textoPadraoRequerimento != null ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
         return parametros;
     }
 
