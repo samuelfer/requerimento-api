@@ -56,13 +56,9 @@ public class OficioService {
     }
 
     public void gerarPdfOficio(Oficio oficio, HttpServletResponse response) throws Exception {
-        try {
-            String caminhoArquivo = jasperPropriedades.getOficio();
-            String nomeArquivo = "oficio";
-            jasperService.gerarPdf(oficio, response, caminhoArquivo, nomeArquivo);
-        } catch (Exception e) {
-            System.out.println("Exception "+e.getMessage());
-        }
+        String caminhoArquivo = jasperPropriedades.getOficio();
+        String nomeArquivo = "oficio";
+        jasperService.gerarPdf(oficio, response, caminhoArquivo, nomeArquivo);
     }
 
     public void numeroOficioJaCadastrado(Oficio oficio) {
