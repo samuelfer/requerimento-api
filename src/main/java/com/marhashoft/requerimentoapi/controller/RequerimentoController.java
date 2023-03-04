@@ -69,7 +69,7 @@ public class RequerimentoController {
             byte[] arquivo = this.jasperService.gerarPDF(requerimento);
 
             response.setContentType(APPLICATION_PDF_VALUE);
-            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "filename=Teste-requerimento");
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "filename="+requerimento.getNumero());
             IOUtils.copy(new ByteArrayInputStream(arquivo), response.getOutputStream());
             response.flushBuffer();
         } catch (Exception e) {
