@@ -42,7 +42,7 @@ public class JasperService {
 
     public void gerarPdf(Requerimento requerimento, HttpServletResponse response,
                          String caminhoArquivo, String nomeArquivo)  throws Exception {
-        Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + "/jasper/"+caminhoArquivo);
+        Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + caminhoArquivo);
 
         JasperReport report = (JasperReport) JRLoader.loadObject(resource.getInputStream());
 
@@ -51,6 +51,7 @@ public class JasperService {
 
         JasperPrint pdfRequerimentoPreenchido = JasperFillManager
                 .fillReport(report, preencherParametros(requerimento), dataSource);
+
 
         byte[] pdfByteArray =  JasperExportManager.exportReportToPdf(pdfRequerimentoPreenchido);
 
@@ -136,7 +137,7 @@ public class JasperService {
 
         parametros.put("textoPadraoPessoa", requerimento.getVereador().getNome()
                 +" , Vereador com assento nesta Casa Legislativa depois da tramitação regimental vem requerer:");
-        parametros.put("textoPadrao", (!textoPadraoRequerimento.isEmpty() ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
+        parametros.put("textoPadrao", (!textoPadraoRequerimento.isEmpty() && textoPadraoRequerimento != null ? textoPadraoRequerimento : "")+" " +new java.text.SimpleDateFormat("dd MMMM yyyy").format(new Date())+".");
         return parametros;
     }
 
@@ -176,23 +177,24 @@ public class JasperService {
         }
     }
 
-    public byte[] gerarPDF(Oficio arquivo) throws Exception {
+    public byte[] gerarPDF(Oficio oficio) throws Exception {
         Map<String, Object> parametros =
-                preencherParametros(arquivo);
+                preencherParametros(oficio);
 
-        return gerarPDFByteArray(parametros, properties.getOficio());
+        return gerarPDFByteArray(parametros, properties.getOficioPreview());
     }
 
     public byte[] gerarPDF(Requerimento requerimento) throws Exception {
         Map<String, Object> parametros =
                 preencherParametros(requerimento);
-
-        return gerarPDFByteArray(parametros, properties.getOficio());
+        return gerarPDFByteArray(parametros, properties.getRequerimentoPreview());
     }
 
     private byte[] gerarPDFByteArray(Map<String, Object> parameters, String caminhoJasper)
             throws Exception {
+
         JasperReport report = carregarJasper(caminhoJasper);
+
         JRBeanCollectionDataSource dataSource =
                 new JRBeanCollectionDataSource(Collections.singletonList(""));
         JasperPrint print = JasperFillManager.fillReport(report, parameters, dataSource);
@@ -200,9 +202,9 @@ public class JasperService {
     }
 
     private JasperReport carregarJasper(String caminho) throws JRException {
-        final JasperDesign jasperDesignMaster =
+        final JasperDesign jasperDesign =
                 JRXmlLoader.load(JasperService.class.getResourceAsStream(caminho));
 
-        return JasperCompileManager.compileReport(jasperDesignMaster);
+        return JasperCompileManager.compileReport(jasperDesign);
     }
 }

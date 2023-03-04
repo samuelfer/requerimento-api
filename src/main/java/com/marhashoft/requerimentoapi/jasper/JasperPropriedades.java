@@ -11,5 +11,7 @@ public class JasperPropriedades {
 
     private String logo;
     private String oficio;
+    private String oficioPreview;
     private String requerimento;
+    private String requerimentoPreview;
 }
