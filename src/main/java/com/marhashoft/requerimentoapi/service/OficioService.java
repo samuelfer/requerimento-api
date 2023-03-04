@@ -2,6 +2,7 @@ package com.marhashoft.requerimentoapi.service;
 
 import com.marhashoft.requerimentoapi.TipoPessoaEnum;
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
+import com.marhashoft.requerimentoapi.jasper.JasperPropriedades;
 import com.marhashoft.requerimentoapi.jasper.JasperService;
 import com.marhashoft.requerimentoapi.model.Oficio;
 import com.marhashoft.requerimentoapi.model.Pessoa;
@@ -22,6 +23,8 @@ public class OficioService {
     private OficioRepository oficioRepository;
     @Autowired
     private JasperService jasperService;
+    @Autowired
+    private JasperPropriedades jasperPropriedades;
     @Autowired
     private GeradorNumeroRequerimentoService geradorNumero;
     @Autowired
@@ -53,13 +56,9 @@ public class OficioService {
     }
 
     public void gerarPdfOficio(Oficio oficio, HttpServletResponse response) throws Exception {
-        try {
-            String caminhoArquivo = "oficio.jasper";
-            String nomeArquivo = "oficio";
-            jasperService.gerarPdf(oficio, response, caminhoArquivo, nomeArquivo);
-        } catch (Exception e) {
-            System.out.println("Exception "+e.getMessage());
-        }
+        String caminhoArquivo = jasperPropriedades.getOficio();
+        String nomeArquivo = "oficio";
+        jasperService.gerarPdf(oficio, response, caminhoArquivo, nomeArquivo);
     }
 
     public void numeroOficioJaCadastrado(Oficio oficio) {
