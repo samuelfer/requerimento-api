@@ -3,7 +3,6 @@ package com.marhashoft.requerimentoapi.service;
 import com.marhashoft.requerimentoapi.CargoEnum;
 import com.marhashoft.requerimentoapi.TipoPessoaEnum;
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
-import com.marhashoft.requerimentoapi.model.Assessor;
 import com.marhashoft.requerimentoapi.model.Cargo;
 import com.marhashoft.requerimentoapi.model.Usuario;
 import com.marhashoft.requerimentoapi.model.Vereador;
@@ -52,9 +51,9 @@ public class VereadorService {
     public Vereador salvar(VereadorDTO vereadorDTO) {
         vereadorJaCadastrado(vereadorDTO);
         vereadorDTO.setAtivo(true);
+        vereadorDTO.setTipoPessoa(tipoPessoaService.findByIdOuErro(TipoPessoaService.TIPO_VEREADOR));
         if (vereadorDTO.getCargo().getDescricao() == null) {
             Cargo cargo = cargoService.findByIdOuErro(CargoEnum.VEREADOR.getId());
-            vereadorDTO.setTipoPessoa(tipoPessoaService.findByIdOuErro(TipoPessoaService.TIPO_VEREADOR));
             vereadorDTO.setCargo(cargo);
         }
         Vereador vereador = modelMapper.map(vereadorDTO, Vereador.class);
