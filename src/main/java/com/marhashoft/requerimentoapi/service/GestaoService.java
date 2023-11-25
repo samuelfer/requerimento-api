@@ -28,6 +28,7 @@ public class GestaoService {
     }
 
     public GestaoDTO cadastrar(GestaoDTO gestaoDTO) {
+        gestaoDTO.setAtiva(true);
         Gestao gestao = gestaoDTOToGestao(gestaoDTO);
         gestaoJaCadastrada(gestao);
         return gestaoToGestaoDTO(gestaoRepository.save(gestao));

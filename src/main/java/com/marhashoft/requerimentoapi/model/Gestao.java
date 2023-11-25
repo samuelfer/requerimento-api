@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -21,6 +22,7 @@ public class Gestao {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_seq")
     private Long id;
 
+    @NotNull
     private boolean ativa;
 
     @JsonFormat(pattern = "dd/MM/yyyy")

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
@@ -15,7 +16,8 @@ public class GestaoDTO {
 
     private Long id;
 
-    private Boolean ativa;
+    @NotNull
+    private boolean ativa;
 
     private LocalDate dataInicio;
 

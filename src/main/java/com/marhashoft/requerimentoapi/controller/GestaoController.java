@@ -29,12 +29,12 @@ public class GestaoController {
     }
 
     @PostMapping
-    public ResponseEntity<Gestao> cadastrar(@Valid @RequestBody GestaoDTO gestaoDTO) {
+    public ResponseEntity<GestaoDTO> cadastrar(@Valid @RequestBody GestaoDTO gestaoDTO) {
         return new ResponseEntity(gestaoService.cadastrar(gestaoDTO), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Gestao> atualizar(@Valid @RequestBody GestaoDTO gestaoDTO) {
+    public ResponseEntity<GestaoDTO> atualizar(@Valid @RequestBody GestaoDTO gestaoDTO) {
         return new ResponseEntity(gestaoService.atualizar(gestaoDTO), HttpStatus.CREATED);
     }
 }
