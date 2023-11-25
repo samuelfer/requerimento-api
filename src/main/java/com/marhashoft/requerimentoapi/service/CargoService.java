@@ -1,9 +1,10 @@
 package com.marhashoft.requerimentoapi.service;
 
 import com.marhashoft.requerimentoapi.exception.DataIntegrationViolationApiException;
-import com.marhashoft.requerimentoapi.model.Assessor;
 import com.marhashoft.requerimentoapi.model.Cargo;
+import com.marhashoft.requerimentoapi.model.dto.CargoDTO;
 import com.marhashoft.requerimentoapi.repository.CargoRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public class CargoService {
 
     @Autowired
     private CargoRepository cargoRepository;
+    @Autowired
+    ModelMapper modelMapper;
 
     public Cargo findByIdOuErro(Long id) {
         return cargoRepository.findById(id).orElseThrow(() -> new RuntimeException("Cargo não encontrado com id " + id));
@@ -24,10 +27,12 @@ public class CargoService {
         return cargoRepository.findAll();
     }
 
-    public Cargo salvar(Cargo cargo) {
+    public CargoDTO salvar(CargoDTO cargoDTO) {
+        Cargo cargo = cargoDTOToCargo(cargoDTO);
         cargoJaCadastrado(cargo);
         cargo.setAtivo(true);
-        return cargoRepository.save(cargo);
+
+        return cargoToCargoDTO(cargoRepository.save(cargo));
     }
 
     private void cargoJaCadastrado(Cargo cargo) {
@@ -37,5 +42,13 @@ public class CargoService {
             throw new DataIntegrationViolationApiException("O cargo  "
                     + cargo.getDescricao() + " já foi cadastrado no sistema!");
         }
+    }
+
+    private CargoDTO cargoToCargoDTO(Cargo cargo) {
+        return modelMapper.map(cargo, CargoDTO.class);
+    }
+
+    private Cargo cargoDTOToCargo(CargoDTO cargoDTO) {
+        return modelMapper.map(cargoDTO, Cargo.class);
     }
 }
