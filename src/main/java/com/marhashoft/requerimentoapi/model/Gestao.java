@@ -21,11 +21,7 @@ public class Gestao {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_seq")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "pessoa_id")
-    private Pessoa pessoa;
-
-    private boolean ativo;
+    private boolean ativa;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataInicio;
