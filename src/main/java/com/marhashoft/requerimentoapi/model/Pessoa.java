@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,8 +39,5 @@ public class Pessoa {
     @ManyToOne
     @JoinColumn(name = "tipo_pessoa_id", foreignKey = @ForeignKey(name = "pessoa_tipo_pessoa"))
     private TipoPessoa tipoPessoa;
-
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
-    private List<Gestao> gestao = new ArrayList<>();
 
 }
