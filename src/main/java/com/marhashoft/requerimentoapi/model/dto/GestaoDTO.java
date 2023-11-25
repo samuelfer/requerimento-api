@@ -20,6 +20,5 @@ public class GestaoDTO {
     private boolean ativa;
 
     private LocalDate dataInicio;
-
     private LocalDate dataFim;
 }

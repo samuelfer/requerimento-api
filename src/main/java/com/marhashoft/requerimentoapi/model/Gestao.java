@@ -1,6 +1,5 @@
 package com.marhashoft.requerimentoapi.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +24,7 @@ public class Gestao {
     @NotNull
     private boolean ativa;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+
     private LocalDate dataInicio;
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFim;
 }
