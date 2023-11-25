@@ -1,6 +1,7 @@
 package com.marhashoft.requerimentoapi.controller;
 
 import com.marhashoft.requerimentoapi.model.Cargo;
+import com.marhashoft.requerimentoapi.model.dto.CargoDTO;
 import com.marhashoft.requerimentoapi.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,12 +31,12 @@ public class CargoController {
     }
 
     @PostMapping
-    public ResponseEntity<Cargo> cadastrar(@Valid @RequestBody Cargo cargo) {
-        return new ResponseEntity(cargoService.salvar(cargo), HttpStatus.CREATED);
+    public ResponseEntity<Cargo> cadastrar(@Valid @RequestBody CargoDTO cargoDTO) {
+        return new ResponseEntity(cargoService.salvar(cargoDTO), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Cargo> atualizar(@Valid @RequestBody Cargo cargo) {
-        return new ResponseEntity(cargoService.salvar(cargo), HttpStatus.CREATED);
+    public ResponseEntity<Cargo> atualizar(@Valid @RequestBody CargoDTO cargoDTO) {
+        return new ResponseEntity(cargoService.salvar(cargoDTO), HttpStatus.CREATED);
     }
 }
