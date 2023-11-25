@@ -1,6 +1,5 @@
 package com.marhashoft.requerimentoapi.service;
 
-import com.marhashoft.requerimentoapi.TipoPessoaEnum;
 import com.marhashoft.requerimentoapi.model.Pessoa;
 import com.marhashoft.requerimentoapi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
