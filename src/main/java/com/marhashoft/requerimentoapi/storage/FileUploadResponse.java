@@ -1,4 +1,4 @@
-package com.marhashoft.requerimentoapi.upload;
+package com.marhashoft.requerimentoapi.storage;
 
 import lombok.Getter;
 import lombok.Setter;

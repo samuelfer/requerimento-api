@@ -14,15 +14,15 @@ public class ArquivoService {
     @Autowired
     private ArquivoRepository arquivoRepository;
 
-    public Arquivo salvar(String nomeArquivo ,MultipartFile multipartFile) {
+    public Arquivo salvar(String nomeArquivo, MultipartFile multipartFile, String tipoArquivo) {
         Arquivo arquivoNovo = new Arquivo();
 
         arquivoNovo.setNome(nomeArquivo);
         arquivoNovo.setSize(multipartFile.getSize());
-        arquivoNovo.setUrl("arquivos_upload/"+nomeArquivo);
+        arquivoNovo.setUrl("uploads/"+nomeArquivo);
         arquivoNovo.setAtivo(true);
         arquivoNovo.setExtension(ArquivoUtil.getExtensionArquivo(nomeArquivo));
-        arquivoNovo.setTipoArquivo(TipoArquivoEnum.FOTO_VEREADOR.getNome());
+        arquivoNovo.setTipoArquivo(TipoArquivoEnum.recuperarTipoPorNome(tipoArquivo).getNome());
 
         return arquivoRepository.save(arquivoNovo);
     }
